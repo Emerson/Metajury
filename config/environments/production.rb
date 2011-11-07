@@ -61,13 +61,5 @@ RocketFuel::Application.configure do
   config.action_mailer.default_url_options = {
     :host => 'http://production-app-url.com',
   }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => 'http://production-app-url.com',
-    :user_name            => 'you@gmail.com',
-    :password             => 'secret-password',
-    :authentication       => 'plain',
-    :enable_starttls_auto => true  }
+
 end
