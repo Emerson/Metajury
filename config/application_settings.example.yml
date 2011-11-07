@@ -1,0 +1,26 @@
+# application_settings.yml
+# ========================
+# This file is used to setup application wide variables that can
+# easily enable or disable specific feature sets. Any settings declared
+# in this YAML file should be available in the ApplicationSettings class.
+
+development:
+  user_registration: true
+  email_notifications: true
+  system_reply_email: you@gmail.com
+  application_name: Rocket Fuel
+  host: 'http://localhost:3000'
+
+test:
+  user_registration: true
+  email_notifications: true
+  system_reply_email: you@gmail.com
+  application_name: Rocket Fuel
+  host: 'http://localhost:3000'
+
+production:
+  user_registration: true
+  email_notifications: true
+  system_reply_email: you@gmail.com
+  application_name: Rocket Fuel
+  host: 'http://localhost:3000'

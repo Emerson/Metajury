@@ -1,0 +1,21 @@
+class UserMailer < ActionMailer::Base
+  default from: ApplicationSettings.config['system_reply_email']
+
+
+  # Sends a user an email with a confirmation link, requesting
+  # that they click to activate their account.
+  def confirmation_email(user)
+    @user = user
+    @url = confirmation_path(user.token, {:only_path => false})
+    mail(:to => user.email, :subject => "New User Confirmation")
+  end
+
+
+  # Advises user that their registration is complete and that they may now login
+  def confirmation_complete_email(user)
+    @user = user
+    mail(:to => user.email, :subject => "Registration Complete")
+  end
+
+
+end

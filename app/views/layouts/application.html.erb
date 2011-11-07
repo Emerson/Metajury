@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rocket Fuel</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <style type="text/css">
+  body {
+    padding-top: 60px;
+  }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="fill">
+        <div class="container">
+            
+            <%= link_to ApplicationSettings.config['application_name'], root_path, {:class => 'brand'} %>
+
+            <ul class="nav">
+              <li class="active"><%= link_to 'Home', root_path %></li>
+              <% if ApplicationSettings.config['user_registration'] && !current_user %>
+              <li><%= link_to 'Signup', signup_path %></li>
+              <% end %>
+            </ul>
+
+    <% if current_user == nil %>
+        <%= form_tag login_path, {:class => 'login pull-right'} do %>
+            <%= text_field_tag :email, '', {:class => 'input-small', :placeholder => 'email'} %>
+            <%= password_field_tag :password, '', {:class => 'input-small', :placeholder => 'password'} %>
+            <%= button_tag 'login', {:type => 'submit', :class => 'btn'} %>
+        <% end %>
+    <% else %>
+            <p class="pull-right">
+                <%= link_to 'Logout', logout_path, {:class => 'logout', :id => 'logout'} %>
+            </p>
+    <% end %>
+    
+        </div><!-- .container -->
+    </div><!-- .fill -->
+</div><!-- .topbar -->
+
+<div class="container">
+
+    <% flash.each do |name, msg| %>
+        <% if msg.is_a?(String) %>
+            <div class="alert-message <%= name %>" id="flash_<%= name %>">
+                <a class="close" href="#">×</a>
+                <%= msg %>
+            </div><!-- .alert-message -->
+        <% end %>
+    <% end %>
+
+    <%= yield %>
+
+    <footer>
+        Copyright &copy;<%= Time.now.year %>
+    </footer>
+
+</div>
+
+</body>
+</html>

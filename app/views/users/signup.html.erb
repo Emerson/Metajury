@@ -1,0 +1,62 @@
+<div class="page-header">
+    <h1>Signup <small> It's fast and easy...</small></h1>
+</div><!-- .page-header -->
+
+<div class="row">
+
+  <div class="span10">
+
+    <%= form_for @user do |f| %>
+
+    <%= bootstrap_errors(@user, {
+          :header_message => 'There was a problem with your signup:',
+          :class => 'error'
+        })
+    %>
+
+      <fieldset>
+
+        <legend>Signup For an Account</legend>
+
+        <div class="clearfix">
+          <%= f.label :email %>
+          <div class="input">
+            <%= f.text_field :email, {:class => 'xLarge', :value => @user.email} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :password %>
+          <div class="input">
+            <%= f.password_field :password, {:class => 'xLarge'} %>      
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :first_name %>
+          <div class="input">
+            <%= f.text_field :first_name, {:class => 'xLarge', :value => @user.first_name} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :last_name %>
+          <div class="input">
+            <%= f.text_field :last_name, {:class => 'xLarge', :value => @user.last_name} %>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= button_tag "Signup", {:id => 'signup', :class => 'btn primary'} %>
+        </div>
+
+      </fieldset>
+
+    <% end %>
+
+  </div><!-- .span10 -->
+
+  <div class="span6">
+  </div><!-- .span6 -->
+
+</div><!-- .row -->
