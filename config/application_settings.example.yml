@@ -9,18 +9,18 @@ development:
   email_notifications: true
   system_reply_email: you@gmail.com
   application_name: Rocket Fuel
-  host: 'http://localhost:3000'
+  host: 'localhost:3000'
 
 test:
   user_registration: true
   email_notifications: true
   system_reply_email: you@gmail.com
   application_name: Rocket Fuel
-  host: 'http://localhost:3000'
+  host: 'localhost:3000'
 
 production:
   user_registration: true
   email_notifications: true
   system_reply_email: you@gmail.com
   application_name: Rocket Fuel
-  host: 'http://localhost:3000'
+  host: 'localhost:3000'
