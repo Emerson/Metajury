@@ -6,3 +6,4 @@ tmp/
 tmp/*/**
 .sass-cache/
 config/email.yml
+config/application_settings.yml
