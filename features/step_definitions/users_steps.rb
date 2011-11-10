@@ -86,3 +86,20 @@ end
 Then /^I should see an error message$/ do
   assert page.has_selector?('div.alert')
 end
+
+
+Given /^I have an unconfirmed user$/ do
+  user = Factory.create(:unconfirmed_user, :email => 'unconfirmed@example.com')
+end
+
+Given /^I try to login$/ do
+  visit root_path
+  fill_in 'email', :with => 'unconfirmed@example.com'
+  fill_in 'password', :with => 'password'
+  click_button('login')
+end
+
+Then /^I should see a "([^"]*)" button$/ do |arg1|
+  assert page.has_selector('.reconfirm')
+end
+

@@ -24,6 +24,17 @@ FactoryGirl.define do
     login_count 0
     confirmed true
   end
+
+  factory :unconfirmed_user, :class => User do
+    email 'unconfirmed@factory.com'
+    password 'password'
+    first_name 'Mr. Unconfirmed'
+    user_level 'user'
+    login_count 0
+    confirmed false
+    token 'fh135aaa'
+  end
+
   # This will use the User class (Admin would have been guessed)
   # factory :admin, :class => User do
   #   first_name 'Admin'

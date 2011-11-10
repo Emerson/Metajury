@@ -8,10 +8,15 @@ RocketFuel::Application.routes.draw do
 
   # User Routes
   resources :users
-  match 'confirm/:token' => 'users#confirm', :as => 'confirmation'
+  match 'confirm/:token'   => 'users#confirm',   :as => 'confirmation'
+  match 'reconfirm/:id'    => 'users#reconfirm', :as => 'reconfirm'
 
   # Conditional Routes
   match 'signup' => 'users#signup', :as => 'signup' if ApplicationSettings.config['user_registration']
+
+  namespace :admin do
+    resources :users
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

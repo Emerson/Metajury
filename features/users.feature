@@ -34,4 +34,8 @@ Scenario: Invalid User Login
   And I am on the homepage
   And I login with "bad-user@cucumber.com"
   Then I should see an error message
-  
+
+Scenario: Unconfirmed User
+  Given I have an unconfirmed user
+  And I try to login
+  Then I should see a "resend confirmation" button

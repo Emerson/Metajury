@@ -7,6 +7,16 @@ class UserSessionsController < ApplicationController
       redirect_to root_path
       return
     end
+
+    @user = User.find_by_email(params[:email])
+    unless @user.blank? and !@user.confirmed?
+      render 'reconfirm'
+      return
+    end
+
+    # Refactor the login method to account for unconfirmed users
+    # at the moment it just returns the user, or false. We need
+    # a method of indicating the reason why the login failed
     @user = User.login(params[:email], params[:password])
     if @user
       session[:user_id] = @user.id
