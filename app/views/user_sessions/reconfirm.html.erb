@@ -1,4 +1,3 @@
 <p>It looks like you've already registered your email, but your account is not yet confirmed. Would you like to resend the confirmation email?</p>
 
-
-<%= reconfirm_path(@user.email) %>
+<%= link_to 'Resend Confirmation', reconfirm_path(@user.id), {:class => 'btn primary reconfirm'} %>

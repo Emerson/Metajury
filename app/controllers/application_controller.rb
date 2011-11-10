@@ -23,8 +23,14 @@ class ApplicationController < ActionController::Base
 
 
   def admin_layout
+    self.current_user
     if controller_path.match(/admin/i)
       layout 'admin'
+    end
+    if @current_user
+      if @current_user.admin?
+        layout 'admin'
+      end
     end
   end
 

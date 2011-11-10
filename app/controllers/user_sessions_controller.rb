@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
     end
 
     @user = User.find_by_email(params[:email])
-    unless @user.blank? and !@user.confirmed?
+    if !@user.blank? and !@user.confirmed?
       render 'reconfirm'
       return
     end

@@ -100,6 +100,6 @@ Given /^I try to login$/ do
 end
 
 Then /^I should see a "([^"]*)" button$/ do |arg1|
-  assert page.has_selector('.reconfirm')
+  assert page.has_selector?('.reconfirm')
 end
 
