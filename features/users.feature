@@ -1,5 +1,5 @@
 Feature: Users
-  In order to user the other features of the staff portal
+  In order to user the other features of the application
   As a user
   I want to create a full-featured user system
 

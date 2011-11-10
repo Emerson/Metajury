@@ -9,6 +9,8 @@ FactoryGirl.define do
   factory :admin, :class => User do
     email 'admin@factory.com'
     password 'password'
+    confirmed true
+    token false
     first_name 'Mr. Admin'
     user_level 'admin'
     login_count 0

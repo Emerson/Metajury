@@ -2,6 +2,11 @@ class UserSessionsController < ApplicationController
 
 
   def login
+    if params[:email].blank? or params[:password].blank?
+      flash[:alert] = 'There was a problem with your email or password'
+      redirect_to root_path
+      return
+    end
     @user = User.login(params[:email], params[:password])
     if @user
       session[:user_id] = @user.id
