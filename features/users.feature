@@ -39,3 +39,10 @@ Scenario: Unconfirmed User
   Given I have an unconfirmed user
   And I try to login
   Then I should see a "resend confirmation" button
+
+Scenario: Reconfirmation Flow
+  Given I have an unconfirmed user
+  And I try to login
+  And I request a reconfirmation
+  And I reconfirm my account
+  Then I should be valid and confirmed

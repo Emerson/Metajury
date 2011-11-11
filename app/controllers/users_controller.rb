@@ -40,4 +40,17 @@ class UsersController < ApplicationController
   end
 
 
+  # Possible exploit. Any user could potentially spam confirmation emails
+  # and cripple someones account
+  def reconfirm
+    @user = User.find(params[:id])
+    if @user && !@user.confirmed?
+      @user.reconfirm!
+      UserMailer.confirmation_email(@user).deliver
+    else
+      redirect_to root_path, :notice => 'That user is already confirmed'
+    end
+  end
+
+
 end

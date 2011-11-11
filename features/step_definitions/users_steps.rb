@@ -1,6 +1,11 @@
 Given /^I have a valid and confirmed user$/ do
-  user = Factory.create(:user, :confirmed => true, :token => nil)
-  assert (user.valid? && user.confirmed?)
+  @valid_confirmed = Factory.create(:user, :confirmed => true, :token => nil)
+  assert (@valid_confirmed.valid? && @valid_confirmed.confirmed?)
+end
+
+Given /^I have an unconfirmed user$/ do
+  @unconfirmed = Factory.create(:unconfirmed_user, :email => 'unconfirmed@example.com')
+  assert !@unconfirmed.confirmed?
 end
 
 Given /^I am on the homepage$/ do
@@ -87,14 +92,9 @@ Then /^I should see an error message$/ do
   assert page.has_selector?('div.alert')
 end
 
-
-Given /^I have an unconfirmed user$/ do
-  user = Factory.create(:unconfirmed_user, :email => 'unconfirmed@example.com')
-end
-
 Given /^I try to login$/ do
   visit root_path
-  fill_in 'email', :with => 'unconfirmed@example.com'
+  fill_in 'email', :with => @unconfirmed.email
   fill_in 'password', :with => 'password'
   click_button('login')
 end
@@ -102,4 +102,21 @@ end
 Then /^I should see a "([^"]*)" button$/ do |arg1|
   assert page.has_selector?('.reconfirm')
 end
+
+Given /^I request a reconfirmation$/ do
+  click_link('reconfirm')
+end
+
+Given /^I reconfirm my account$/ do
+  unconfirmed = User.find_by_email(@unconfirmed.email)
+  visit confirmation_path(unconfirmed.token)
+  unconfirmed = User.find_by_email(@unconfirmed.email)
+  assert unconfirmed.confirmed?
+end
+
+Then /^I should be valid and confirmed$/ do
+  unconfirmed = User.find_by_email(@unconfirmed.email)
+  assert unconfirmed.confirmed?
+end
+
 

@@ -17,8 +17,6 @@ class User < ActiveRecord::Base
   # Returns the users record if it's a valid login, otherwise
   # it will return false.
   def self.login(email, password)
-    puts "email: #{email}"
-    puts "password: #{password}"
     hashed_password = Digest::SHA1.hexdigest(password)
     user = User.where(:email => email, :password => hashed_password, :confirmed => true).first
     if user.blank?
