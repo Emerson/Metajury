@@ -8,3 +8,7 @@ Given /^I login$/ do
   fill_in 'password', :with => 'password'
   click_button('login');
 end
+
+Then /^I should see the admin layout$/ do
+  assert page.has_selector?('body.admin'), "Body missing the admin class"
+end

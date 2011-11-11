@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   # Returns true if a user has a user_level of 'admin', otherwise
   # returns false.
   def admin?
-    if user_level === 'admin'
+    if user_level === 'admin' or user_level === 'super-admin'
       true
     else
       false

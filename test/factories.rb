@@ -16,6 +16,16 @@ FactoryGirl.define do
     login_count 0
   end
 
+  factory :super_admin, :class => User do
+    email 'super-admin@factory.com'
+    password 'password'
+    confirmed true
+    token false
+    first_name 'Mr. Admin'
+    user_level 'super-admin'
+    login_count 0
+  end
+
   factory :valid_user, :class => User do
     email 'valid-user@factory.com'
     password 'password'

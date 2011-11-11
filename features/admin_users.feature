@@ -7,4 +7,4 @@ Scenario: Admin Layout
   Given I have a valid and confirmed admin user
   And I am on the homepage
   And I login
-  Then I should see "admin"
+  Then I should see the admin layout

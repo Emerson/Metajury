@@ -37,8 +37,13 @@ class UserTest < ActiveSupport::TestCase
     assert((user.confirmed === false && !user.token.blank?))
   end
 
-  test "admin? should only be true when user_level equals 'admin'" do
+  test "admin? should be true when user_level equals 'admin'" do
     user = User.find_by_email('admin@application.com')
+    assert(user.admin?)
+  end
+
+  test "admin? should also be true when user_level equals 'super-admin'" do
+    user = Factory.create(:super_admin)
     assert(user.admin?)
   end
 
