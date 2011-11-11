@@ -21,7 +21,11 @@ class UserSessionsController < ApplicationController
     if @user
       session[:user_id] = @user.id
       flash[:success] = 'You have been logged in'
-      redirect_to root_path
+      if @user.admin?
+        redirect_to admin_root_path
+      else
+        redirect_to root_path
+      end
     else
       flash.now[:alert] = 'There was a problem with your email or password'
     end
