@@ -25,3 +25,7 @@ Then /^I should see the admin menu$/ do
   visit admin_root_path
   assert page.has_selector?('ul.nav li.users')
 end
+
+Then /^I should see the dashboard page$/ do
+  assert page.has_selector?('div.dashboard')
+end

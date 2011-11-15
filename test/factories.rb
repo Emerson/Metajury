@@ -1,13 +1,19 @@
 FactoryGirl.define do
+  sequence :unique_name do |n|
+    "mr-firstname-#{n}"
+  end
+end
+
+FactoryGirl.define do
 
   factory :user do
+    first_name 'Mr. Clone'
     email 'clone@factory.com'
     password  'password'
-    first_name 'Mr. Clone'
   end
 
   factory :admin, :class => User do
-    email 'admin@factory.com'
+    email "admin-#{FactoryGirl.generate(:unique_name)}@factory.com"
     password 'password'
     confirmed true
     token false

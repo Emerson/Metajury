@@ -16,7 +16,7 @@ RocketFuel::Application.routes.draw do
 
   namespace :admin do
     resources :users
-    root :to => 'users#index'
+    root :to => 'dashboard#index'
   end
 
   # The priority is based upon order of creation:

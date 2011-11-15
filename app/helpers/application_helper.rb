@@ -1,6 +1,7 @@
 module ApplicationHelper
 
 
+  # Outputs bootstrap compatible errors
   def bootstrap_errors(*params)
     options = params.extract_options!.symbolize_keys
 
@@ -72,6 +73,7 @@ module ApplicationHelper
     end
 
 
+  # A quick helper to output bootstrap buttons
   def bootstrap_button(text, *params)
     options = params.extract_options!.symbolize_keys
     if options.include?(:class)
@@ -80,6 +82,23 @@ module ApplicationHelper
     options[:class] ||= "btn small"
     options[:href]  ||= "#"
     content_tag(:a, text, options)
+  end
+
+
+  # Outputs the admin navigation
+  def admin_nav
+    items = {'Home' => admin_root_path, 'Users' => admin_users_path}
+    html = Array.new
+    items.each do |text, path|
+      item_path = Rails.application.routes.recognize_path(path)
+      current_path = {:action => params[:action], :controller => params[:controller]}
+      class_name = text.downcase
+      if item_path[:controller] == current_path[:controller] && item_path[:action] == current_path[:action]
+        class_name << " active"
+      end
+      html << content_tag(:li, link_to(text, path), :class => class_name)
+    end
+    html.join("\n").html_safe
   end
 
 

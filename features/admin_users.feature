@@ -13,3 +13,7 @@ Scenario: Admin Menu
   Given I am logged in as an admin user
   And I am on the homepage
   Then I should see the admin menu
+
+Scenario: Admin Dashboard
+  Given I am logged in as an admin user
+  Then I should see the dashboard page

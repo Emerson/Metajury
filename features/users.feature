@@ -13,7 +13,7 @@ Scenario: User Login Flow
   Given I have a valid and confirmed user
   And I am on the homepage
   And I am logged out
-  And I login with the email "emerson.lackey@gmail.com" and the password "password"
+  And I login with the email "confirmed-user@cucumber.com" and the password "password"
   Then I should be logged in
 
 Scenario: User Logout Flow
