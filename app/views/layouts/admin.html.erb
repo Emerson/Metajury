@@ -20,10 +20,8 @@
             <%= link_to ApplicationSettings.config['application_name'], root_path, {:class => 'brand'} %>
 
             <ul class="nav">
-              <li class="active"><%= link_to 'Home', root_path %></li>
-              <% if ApplicationSettings.config['user_registration'] && !current_user %>
-              <li><%= link_to 'Signup', signup_path %></li>
-              <% end %>
+              <li><%= link_to 'Home', root_path %></li>
+              <li class="users active"><%= link_to 'User', admin_users_path %></li>
             </ul>
 
     <% if current_user == nil %>

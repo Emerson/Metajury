@@ -8,3 +8,8 @@ Scenario: Admin Layout
   And I am on the homepage
   And I login
   Then I should see the admin layout
+
+Scenario: Admin Menu
+  Given I am logged in as an admin user
+  And I am on the homepage
+  Then I should see the admin menu
