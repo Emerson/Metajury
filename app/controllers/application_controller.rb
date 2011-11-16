@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :require_admin, :admin_layout
 
   def current_user
-    logger.info "Calling current user"
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
   end
 
@@ -33,5 +32,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
 
 end

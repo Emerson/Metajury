@@ -8,7 +8,7 @@ FactoryGirl.define do
 
   factory :user do
     first_name 'Mr. Clone'
-    email 'clone@factory.com'
+    email "clone#{FactoryGirl.generate(:unique_name)}@factory.com"
     password  'password'
   end
 
@@ -33,11 +33,12 @@ FactoryGirl.define do
   end
 
   factory :valid_user, :class => User do
-    email 'valid-user@factory.com'
+    email "valid-user-#{FactoryGirl.generate(:unique_name)}@factory.com"
     password 'password'
     first_name 'Mr. Valid'
     user_level 'user'
     login_count 0
+    token false
     confirmed true
   end
 

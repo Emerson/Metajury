@@ -77,4 +77,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(user.password, Digest::SHA1.hexdigest(password))
   end
 
+  test 'non-admin users cannot change other users accounts' do
+    user = Factory.create(:valid_user, :email => 'naughty-user@bad.com')
+    another_user = Factory.create(:valid_user)
+    assert_equal(false, user.can_update?(another_user))
+  end
+
 end

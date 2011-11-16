@@ -17,6 +17,26 @@ class UsersController < ApplicationController
   end
 
 
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Your account has been updated"
+      redirect_to account_path
+      return
+    else
+      render 'edit'
+    end
+  end
+
+
+  def edit
+    @user = current_user
+    if params[:id] && params[:id] != @user.id
+      flash[:error] = 'There was an error trying to edit that user'
+      redirect_to root_path
+    end
+  end
+
   # Non-Restful Routes
 
 

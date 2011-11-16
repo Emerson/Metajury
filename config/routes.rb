@@ -13,6 +13,7 @@ RocketFuel::Application.routes.draw do
 
   # Conditional Routes
   match 'signup' => 'users#signup', :as => 'signup' if ApplicationSettings.config['user_registration']
+  match 'account' => 'users#edit', :as => 'account'
 
   namespace :admin do
     resources :users

@@ -46,3 +46,15 @@ Scenario: Reconfirmation Flow
   And I request a reconfirmation
   And I reconfirm my account
   Then I should be valid and confirmed
+
+Scenario: Account Update
+  Given I have a valid and confirmed user
+  And I am logged in
+  And I update some account details
+  Then my account changes should be reflected
+
+Scenario: Only Edit Personal Account
+  Given I have a valid and confirmed user
+  And I am logged in
+  And I try to update another persons account
+  Then I should see an error

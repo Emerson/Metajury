@@ -119,4 +119,21 @@ Then /^I should be valid and confirmed$/ do
   assert unconfirmed.confirmed?
 end
 
+Given /^I update some account details$/ do
+  visit account_path
+  fill_in 'user_first_name', :with => 'Dr. Watson'
+  click_button('update')
+end
 
+Then /^my account changes should be reflected$/ do
+  assert page.find_field('user_first_name').value == 'Dr. Watson'
+end
+
+Given /^I try to update another persons account$/ do
+  another_user = Factory.create(:valid_user)
+  visit edit_user_path(another_user.id)
+end
+
+Then /^I should see an error$/ do
+  assert page.has_selector?('.error')
+end

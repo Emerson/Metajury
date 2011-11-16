@@ -57,6 +57,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  # can_update?(user)
+  # =================
+  # Returns true if a user can update the passed user, otherwise
+  # it returns false.
+  def can_update?(user)
+    if user_level == ('admin' || 'super-admin')
+      return true
+    end
+    if id == user.id
+      return true
+    end
+    return false
+  end
+
 
   # admin?
   # ======

@@ -1,13 +1,27 @@
 <div id="home" class="home content">
 
+
   <% if current_user == nil %>
 
-    <p>Please login to continue</p>
+    <div class="page-header">
+      <h1>Login to Continue</h1>
+    </div><!-- .page-header -->
+
+    <p>
+    If you are seeing this content, it means that you are currently logged out of the application. In order to continue, you'll need to signup, or have an administrator create an account for you.
+    </p>
 
   <% else %>
 
-    <p>You are now logged in</p>
-  
+    <div class="page-header">
+      <h1>Welcome!</h1>
+    </div><!-- .page-header -->
+
+    <p>
+    This content is only visible if you are logged into the application. Users who do not have accounts will be unable to view this message and will need to either signup, or have an administrator create an account for them.
+    </p>
+
   <% end %>
+
 
 </div><!-- .homepage -->

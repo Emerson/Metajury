@@ -1,8 +1,58 @@
-<%= form_for @user do |f| %>
+<div class="page-header">
+  <h1>Account Details <small> for <%= @current_user.email %></small></h1>
+</div><!-- .page-header -->
 
-  <%= f.label :email %><br />
-  <%= f.text_field :email %><br /><br />
+<div class="row">
 
-  <%= f.submit "Update" %><br />
-  
-<% end %>
+  <div class="span10">
+    <%= form_for @current_user do |f| %>
+
+    <%= bootstrap_errors(@current_user, {
+          :header_message => 'There was a problem updating your account:',
+          :class => 'error'
+        })
+    %>
+
+      <fieldset>
+
+        <div class="clearfix">
+          <%= f.label :email %>
+          <div class="input">
+            <%= f.text_field :email, {:class => 'xLarge', :value => @current_user.email} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :password %>
+          <div class="input">
+            <%= f.password_field :password, {:class => 'xLarge'} %>      
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :first_name %>
+          <div class="input">
+            <%= f.text_field :first_name, {:class => 'xLarge', :value => @current_user.first_name} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :last_name %>
+          <div class="input">
+            <%= f.text_field :last_name, {:class => 'xLarge', :value => @current_user.last_name} %>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= button_tag "Update", {:id => 'update', :class => 'btn primary'} %>
+        </div>
+
+      </fieldset>
+
+    <% end %>
+  </div><!-- .span10 -->
+
+  <div class="span6">
+  </div><!-- .span6 -->
+
+</div><!-- .row -->

@@ -85,9 +85,30 @@ module ApplicationHelper
   end
 
 
-  # Outputs the admin navigation
+  # Outputs the admin navigation.
   def admin_nav
     items = {'Home' => admin_root_path, 'Users' => admin_users_path}
+    output_nav(items)
+  end
+
+
+  # Outputs the user navigation, which depends on wheather
+  # a user is currently logged in or not.
+  def user_nav
+    if @current_user
+      items = {'Home' => root_path, 'My Account' => account_path}
+    else
+      if ApplicationSettings.config['user_registration']
+      end
+      items = {'Home' => root_path, 'Signup' => signup_path}
+    end
+    output_nav(items)
+  end
+
+
+  # A utility function that actually outputs the list items and links.
+  # Might require some refactoring to better account for "active" nav states.
+  def output_nav(items)
     html = Array.new
     items.each do |text, path|
       item_path = Rails.application.routes.recognize_path(path)
