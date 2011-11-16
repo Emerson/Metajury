@@ -1,4 +1,11 @@
-<h3>User List</h3>
+<div class="page-header">
+    <h1>All Users</h1>
+</div><!-- .page-header -->
+
+<ul class="pills">
+  <li class="active"><%= link_to 'All Users', admin_users_path, {:id => 'admin_users'} %></li>
+  <li><%= link_to 'New User', new_admin_user_path, {:id => 'new_admin_user'} %></li>
+</ul>
 
 <table class="bordered-table">
   <thead>

@@ -29,3 +29,18 @@ end
 Then /^I should see the dashboard page$/ do
   assert page.has_selector?('div.dashboard')
 end
+
+Given /^I am on the new user page$/ do
+  visit admin_users_path
+  click_link('new_admin_user')
+end
+
+Then /^I should be able to add new users$/ do
+  user = Factory.attributes_for(:user)
+  fill_in 'user_email', :with => user.email
+  fill_in 'user_password', :with => 'password'
+  fill_in 'user_first_name', :with => user.first_name
+  fill_in 'user_last_name', :with => user.last_name
+  click_button('Add User')
+  assert User.find_by_email(user.email)
+end

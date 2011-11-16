@@ -14,6 +14,11 @@ Scenario: Admin Menu
   And I am on the homepage
   Then I should see the admin menu
 
+Scenario: Admin Add Users
+  Given I am logged in as an admin user
+  And I am on the new user page
+  Then I should be able to add new users
+
 Scenario: Admin Dashboard
   Given I am logged in as an admin user
   Then I should see the dashboard page
