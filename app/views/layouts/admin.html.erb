@@ -30,9 +30,12 @@
             <%= button_tag 'login', {:type => 'submit', :class => 'btn'} %>
         <% end %>
     <% else %>
-            <p class="pull-right">
-                <%= link_to 'Logout', logout_path, {:class => 'logout', :id => 'logout'} %>
-            </p>
+            <span class="pull-right">
+                <ul class="nav">
+                    <%= content_tag(:li, link_to('User View', root_path)) %>
+                    <li><%= link_to 'Logout', logout_path, {:class => 'logout', :id => 'logout'} %></li>
+                </li>
+            </span>
     <% end %>
     
         </div><!-- .container -->
