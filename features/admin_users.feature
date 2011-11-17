@@ -27,3 +27,10 @@ Scenario: Admin Add User Menu
   Given I am logged in as an admin user
   And I am on the new user page
   Then I should special admin fields
+
+Scenario: Admin Edit User Flow
+  Given I am logged in as an admin user
+  And I am on the admin users page
+  And I choose to edit a user
+  And I update their profile information
+  Then their profile should be updated

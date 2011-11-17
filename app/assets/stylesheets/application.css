@@ -11,3 +11,11 @@
   margin: 0 0 10px 0;
   border-bottom: 1px solid #ccc;
 }
+
+/*
+ * Bootstrap Customizations are minimal, but required for particular areas
+ *
+*/
+.admin_users td {
+   vertical-align: middle;
+}

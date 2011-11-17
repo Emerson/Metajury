@@ -49,3 +49,22 @@ Then /^I should special admin fields$/ do
   assert page.has_selector?('#user_send_password')
   assert page.has_selector?('#user_user_level')
 end
+
+Given /^I am on the admin users page$/ do
+  edited_user = Factory.create(:user, :email => 'user_to_edit@editing.com')
+  visit admin_users_path
+  assert page.has_selector?('table.admin_users')
+end
+
+Given /^I choose to edit a user$/ do
+  click_link('a.edit_admin_user_link:last')
+end
+
+Given /^I update their profile information$/ do
+  save_and_open_page
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^their profile should be updated$/ do
+  pending # express the regexp above with the code you wish you had
+end

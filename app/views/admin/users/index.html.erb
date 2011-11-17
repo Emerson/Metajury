@@ -7,22 +7,24 @@
   <li><%= link_to 'New User', new_admin_user_path, {:id => 'new_admin_user'} %></li>
 </ul>
 
-<table class="bordered-table">
+<table class="zebra-striped admin_users">
   <thead>
     <tr>
+      <th>Email</th>
       <th>First Name</th>
       <th>Last Name</th>
-      <th>Email</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.email %> <%= content_tag(:span, 'Unconfirmed', {:class => 'label warning'}) unless user.confirmed? %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_user_path(user), {:class => 'btn small primary edit_admin_user_link'} %>
+        </td>
       </tr>
     <% end %>
   </tbody>
