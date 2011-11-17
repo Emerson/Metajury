@@ -114,7 +114,7 @@ module ApplicationHelper
       item_path = Rails.application.routes.recognize_path(path)
       current_path = {:action => params[:action], :controller => params[:controller]}
       class_name = text.downcase
-      if item_path[:controller] == current_path[:controller] && item_path[:action] == current_path[:action]
+      if item_path[:controller] == current_path[:controller] # && item_path[:action] == current_path[:action]
         class_name << " active"
       end
       html << content_tag(:li, link_to(text, path), :class => class_name)

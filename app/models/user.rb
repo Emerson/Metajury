@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   after_create :generate_token, :set_login_count
 
 
+  # Virtual Attributes
+  attr_accessor :send_password
+
+
   # self.login(email, password)
   # ======================
   # Returns the users record if it's a valid login, otherwise
@@ -45,6 +49,14 @@ class User < ActiveRecord::Base
   end
 
 
+  # self.user_levels
+  # ===============
+  # Outputs a hash of potential user_levels
+  def self.user_levels
+    {'Normal User' => 'user', 'Admin' => 'admin'}
+  end
+
+
   # password=(attribute)
   # ====================
   # Overrides the password setter and ensures that it will always be
@@ -56,6 +68,7 @@ class User < ActiveRecord::Base
       hashed_password
     end
   end
+
 
   # can_update?(user)
   # =================

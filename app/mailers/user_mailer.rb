@@ -18,4 +18,12 @@ class UserMailer < ActionMailer::Base
   end
 
 
+  def send_password(user, password)
+    @user = user
+    @password = password
+    @url = login_path({:only_path => false})
+    mail(:to => user.email, :subject => "Account Created")
+  end
+
+
 end

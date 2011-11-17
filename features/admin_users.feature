@@ -22,3 +22,8 @@ Scenario: Admin Add Users
 Scenario: Admin Dashboard
   Given I am logged in as an admin user
   Then I should see the dashboard page
+
+Scenario: Admin Add User Menu
+  Given I am logged in as an admin user
+  And I am on the new user page
+  Then I should special admin fields
