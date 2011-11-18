@@ -1,0 +1,86 @@
+<div class="page-header">
+    <h1>Edit User</h1>
+</div><!-- .page-header -->
+
+<ul class="pills">
+  <li><%= link_to 'All Users', admin_users_path, {:id => 'admin_users'} %></li>
+  <li class="active"><%= link_to 'New User', new_admin_user_path, {:id => 'new_admin_user'} %></li>
+</ul>
+
+<div class="row">
+
+  <div class="span10">
+
+    <%= form_for @user, {:url => admin_user_path(@user)} do |f| %>
+
+    <%= bootstrap_errors(@user, {
+          :header_message => 'There was a problem adding the user:',
+          :class => 'error'
+        })
+    %>
+
+      <fieldset>
+
+        <div class="clearfix">
+          <%= f.label :email %>
+          <div class="input">
+            <%= f.text_field :email, {:class => 'xLarge', :value => @user.email} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :password %>
+          <div class="input">
+            <%= f.password_field :password, {:class => 'xLarge'} %>      
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :first_name %>
+          <div class="input">
+            <%= f.text_field :first_name, {:class => 'xLarge', :value => @user.first_name} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :last_name %>
+          <div class="input">
+            <%= f.text_field :last_name, {:class => 'xLarge', :value => @user.last_name} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= f.label :user_level %>
+          <div class="input">
+          <%= select(:user, :user_level, User.user_levels) %>
+          </div>
+        </div>
+        
+
+        <div class="clearfix">  
+          <div class="input">
+            <ul class="inputs-list">
+              <li>
+                <label for="user_send_password">
+                  <%= f.check_box :send_password %>
+                  <span>Email this user their password</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= button_tag "Update User", {:id => 'signup', :class => 'btn primary'} %>
+        </div>
+
+      </fieldset>
+
+    <% end %>
+
+  </div><!-- .span10 -->
+
+  <div class="span6">
+  </div><!-- .span6 -->
+
+</div><!-- .row -->

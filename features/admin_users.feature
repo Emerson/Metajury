@@ -31,6 +31,5 @@ Scenario: Admin Add User Menu
 Scenario: Admin Edit User Flow
   Given I am logged in as an admin user
   And I am on the admin users page
-  And I choose to edit a user
-  And I update their profile information
+  And I choose to edit a user and update their account
   Then their profile should be updated

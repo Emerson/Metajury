@@ -51,20 +51,21 @@ Then /^I should special admin fields$/ do
 end
 
 Given /^I am on the admin users page$/ do
-  edited_user = Factory.create(:user, :email => 'user_to_edit@editing.com')
+  @edited_user = Factory.create(:user, :email => 'user_to_edit@editing.com')
   visit admin_users_path
   assert page.has_selector?('table.admin_users')
 end
 
-Given /^I choose to edit a user$/ do
-  click_link('a.edit_admin_user_link:last')
-end
-
-Given /^I update their profile information$/ do
-  save_and_open_page
-  pending # express the regexp above with the code you wish you had
+Given /^I choose to edit a user and update their account$/ do
+  link = page.find(:css, 'a.edit_admin_user_link:last')
+  @edit_id = link['id'].split("_").last # returns id from user_13
+  link.click
+  @new_name = "Jerry"
+  fill_in 'user_first_name', :with => @new_name
+  click_button('Update User')
 end
 
 Then /^their profile should be updated$/ do
-  pending # express the regexp above with the code you wish you had
+  edited_user = User.find_by_id(@edit_id)
+  assert_equal(@new_name, edited_user.first_name)
 end

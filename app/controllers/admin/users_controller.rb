@@ -14,6 +14,21 @@ class Admin::UsersController < ApplicationController
   end
 
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+
+  def update
+    @user = User.find_by_id(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to edit_admin_user_path(@user), :success => "Account has been updated"
+    else
+      render 'edit'
+    end
+  end
+
+
   def create
     @user = User.create(params[:user])
     if @user.save
