@@ -52,7 +52,14 @@
         <div class="clearfix">
           <%= f.label :user_level %>
           <div class="input">
-          <%= select(:user, :user_level, User.user_levels) %>
+          <%
+          if @user.admin?
+            selected = 'admin'
+          else
+            selected = 'user'
+          end
+          %>
+          <%= select(:user, :user_level, User.user_levels, {:selected => selected}) %>
           </div>
         </div>
         

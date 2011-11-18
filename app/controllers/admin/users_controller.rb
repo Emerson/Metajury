@@ -21,6 +21,9 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find_by_id(params[:id])
+    if @user.user_level = 'super-admin'
+      params[:user][:user_level] = 'super-admin'
+    end
     if @user.update_attributes(params[:user])
       flash[:success] = "Account has been updated"
       redirect_to edit_admin_user_path(@user)
