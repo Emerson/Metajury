@@ -23,7 +23,7 @@
                 <%= user_nav %>
             </ul>
 
-    <% if current_user == nil %>a
+    <% if current_user == nil %>
         <%= form_tag login_path, {:class => 'login pull-right'} do %>
             <%= text_field_tag :email, '', {:class => 'input-small', :placeholder => 'email'} %>
             <%= password_field_tag :password, '', {:class => 'input-small', :placeholder => 'password'} %>
