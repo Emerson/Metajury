@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.user_level = 'user'
     if @user.save
       UserMailer.confirmation_email(@user).deliver
       render 'registration_steps'
@@ -19,6 +20,8 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
+    # Ensure that users have not tried to alter their user_level
+    params[:user][:user_level] = 'user' unless @user.admin? || params[:user].blank?
     if @user.update_attributes(params[:user])
       flash[:success] = "Your account has been updated"
       redirect_to account_path
