@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021024902) do
+ActiveRecord::Schema.define(:version => 20111119211136) do
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20111021024902) do
     t.datetime "updated_at"
     t.string   "user_level"
     t.string   "password"
+    t.string   "reset_token"
   end
 
 end

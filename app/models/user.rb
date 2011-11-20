@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     if user.blank?
       false
     else
-      user.update_attribute(:login_count, (user.login_count + 1))
+      user.update_attributes(:login_count => (user.login_count + 1), :reset_token => nil)
       user
     end
   end
@@ -116,6 +116,14 @@ class User < ActiveRecord::Base
   # Marks as user as confirmed and clears their token
   def confirm!
     self.update_attributes(:confirmed => true, :token => false)
+  end
+
+
+  # request_password_reset
+  # ======================
+  # Generates a reset_token that can be used for password resets.
+  def request_password_reset
+    self.update_attributes(:reset_token => random_token)
   end
 
 

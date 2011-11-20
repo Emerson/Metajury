@@ -11,9 +11,14 @@ RocketFuel::Application.routes.draw do
   match 'confirm/:token'   => 'users#confirm',   :as => 'confirmation'
   match 'reconfirm/:id'    => 'users#reconfirm', :as => 'reconfirm'
 
+  # Password Reset Routes
+  match 'request-password-reset' => 'users#request_password_reset', :as => 'request_password_reset'
+  match 'password/:token/update' => 'users#update_password',        :as => 'update_password',      :via => [:get, :post]
+  match 'password/send-reset'    => 'users#send_password_reset',    :as => 'send_password_reset',  :via => :post
+
   # Conditional Routes
-  match 'signup' => 'users#signup', :as => 'signup' if ApplicationSettings.config['user_registration']
-  match 'account' => 'users#edit', :as => 'account'
+  match 'signup'  => 'users#signup', :as => 'signup' if ApplicationSettings.config['user_registration']
+  match 'account' => 'users#edit',   :as => 'account'
 
   namespace :admin do
     resources :users
@@ -21,7 +26,7 @@ RocketFuel::Application.routes.draw do
   end
 
   # The priority is based upon order of creation:
-  # first created -> highest priority.
+  # first created -> highest priority
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

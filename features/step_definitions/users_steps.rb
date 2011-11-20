@@ -137,3 +137,30 @@ end
 Then /^I should see an error$/ do
   assert page.has_selector?('.error')
 end
+
+Given /^I have a user with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
+  Factory.create(:valid_user, :email => email, :password => password)
+end
+
+Given /^I try to login with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
+  visit login_path
+  fill_in 'email', :with => email
+  fill_in 'password', :with => password
+  click_button('login')
+end
+
+Given /^I reset the "([^"]*)" account password to "([^"]*)"$/ do |email, new_password|
+  user = User.find_by_email(email)
+  visit request_password_reset_path
+  fill_in 'password_request_email', :with => email
+  click_button('request_reset_button')
+  user = User.find_by_email(email)
+  visit update_password_path(user.reset_token)
+  fill_in 'new_password', :with => new_password
+  click_button('update_password_button')
+end
+
+Then /^the "([^"]*)" account password should be "([^"]*)"$/ do |email, new_password|
+  user = User.login(email, new_password)
+  assert(user)
+end

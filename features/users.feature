@@ -58,3 +58,10 @@ Scenario: Only Edit Personal Account
   And I am logged in
   And I try to update another persons account
   Then I should see an error
+  
+Scenario: Password Reset Flow
+  Given I have a user with the email "password-reset@rocketfuel.com" and the password "password"
+  And I try to login with the email "password-reset@rocketfuel.com" and the password "wrongpassword"
+  And I reset the "password-reset@rocketfuel.com" account password to "newpassword"
+  Then the "password-reset@rocketfuel.com" account password should be "newpassword"
+  

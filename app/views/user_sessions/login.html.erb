@@ -1,0 +1,43 @@
+<div class="page-header">
+    <h1>Login</h1>
+</div><!-- .page-header -->
+
+<div class="row">
+
+  <div class="span10">
+
+    <%= form_tag login_path, {:class => 'login'} do %>
+
+      <fieldset>
+
+        <div class="clearfix">
+          <%= label_tag 'Email' %>
+          <div class="input">
+            <%= text_field_tag :email, '', {:class => 'xLarge'} %>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <%= label_tag 'Password' %>
+          <div class="input">
+            <%= password_field_tag :password, '', {:class => 'xLarge'} %>
+            <span class="help-block">
+              <%= link_to 'Forgot Password?', request_password_reset_path %>
+            </span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= button_tag "Login", {:id => 'login', :class => 'btn primary'} %>
+        </div>
+
+      </fieldset>
+
+    <% end %>
+
+  </div><!-- .span10 -->
+
+  <div class="span6">
+  </div><!-- .span6 -->
+
+</div><!-- .row -->

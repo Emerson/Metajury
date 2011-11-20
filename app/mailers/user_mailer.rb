@@ -26,4 +26,11 @@ class UserMailer < ActionMailer::Base
   end
 
 
+  def password_reset_request(user)
+    @user = user
+    @url = update_password_path(@user.reset_token, {:only_path => false})
+    mail(:to => @user.email, :subject => "Password Reset Request")
+  end
+
+
 end

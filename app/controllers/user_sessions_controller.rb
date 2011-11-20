@@ -2,33 +2,40 @@ class UserSessionsController < ApplicationController
 
 
   def login
-    if params[:email].blank? or params[:password].blank?
-      flash[:alert] = 'There was a problem with your email or password'
-      redirect_to root_path
-      return
-    end
+    session[:user_id] = nil
 
-    @user = User.find_by_email(params[:email])
-    if !@user.blank? and !@user.confirmed?
-      render 'reconfirm'
-      return
-    end
+    if request.post? # If the user is trying to login
 
-    # Refactor the login method to account for unconfirmed users
-    # at the moment it just returns the user, or false. We need
-    # a method of indicating the reason why the login failed
-    @user = User.login(params[:email], params[:password])
-    if @user
-      session[:user_id] = @user.id
-      flash[:success] = 'You have been logged in'
-      if @user.admin?
-        redirect_to admin_root_path
-      else
-        redirect_to root_path
+      if params[:email].blank? or params[:password].blank?
+        flash.now[:alert] = 'There was a problem with your email or password'
+        return
       end
-    else
-      flash.now[:alert] = 'There was a problem with your email or password'
-    end
+
+      @user = User.find_by_email(params[:email])
+      if !@user.blank? and !@user.confirmed?
+        render 'reconfirm'
+        return
+      end
+
+      # Refactor the login method to account for unconfirmed users
+      # at the moment it just returns the user, or false. We need
+      # a method of indicating the reason why the login failed
+      @user = User.login(params[:email], params[:password])
+      if @user
+        session[:user_id] = @user.id
+        flash[:success] = 'You have been logged in'
+        if @user.admin?
+          redirect_to admin_root_path
+        else
+          redirect_to root_path
+        end
+      else
+        flash.now[:alert] = 'There was a problem with your email or password'
+        render 'login'
+      end
+
+    end # request.post? ends here
+
   end
 
 

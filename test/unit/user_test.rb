@@ -83,4 +83,17 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(false, user.can_update?(another_user))
   end
 
+  test 'request_password_reset should generate a reset_token' do
+    user = Factory.create(:valid_user)
+    user.request_password_reset
+    assert(user.reset_token)
+  end
+
+  test "logins should clear a users reset_token" do
+    user = Factory.create(:valid_user)
+    user.request_password_reset
+    user = User.login(user.email, 'password')
+    assert_equal(nil, user.reset_token)
+  end
+
 end
