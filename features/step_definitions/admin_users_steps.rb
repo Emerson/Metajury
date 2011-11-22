@@ -57,7 +57,6 @@ Given /^I am on the admin users page$/ do
 end
 
 Given /^I choose to edit a user and update their account$/ do
-  save_and_open_page
   link = page.find(:css, 'a.edit_admin_user_link')
   @edit_id = link['id'].split("_").last # returns id from user_13
   link.click
