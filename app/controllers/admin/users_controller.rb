@@ -21,10 +21,10 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find_by_id(params[:id])
-    if @user.user_level = 'super-admin'
-      params[:user][:user_level] = 'super-admin'
-    end
     if @user.update_attributes(params[:user])
+      if @user.confirmed == true
+        @user.update_attributes({:token => nil})
+      end
       flash[:success] = "Account has been updated"
       redirect_to edit_admin_user_path(@user)
     else
@@ -45,5 +45,24 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+
+  def confirm_delete
+    @user = User.find(params[:id])
+  end
+
+
+  def destroy
+    @user = User.find(params[:id])
+    puts @current_user.inspect
+    if @current_user.can_update?(@user)
+      @user.destroy
+      flash[:success] = "User successfully deleted"
+      redirect_to admin_root_path
+    else
+      flash[:alert] = "You do not the rights to delete that user"
+      redirect_to admin_root_path
+      return
+    end
+  end
 
 end

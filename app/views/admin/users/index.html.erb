@@ -19,11 +19,16 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.email %> <%= content_tag(:span, 'Unconfirmed', {:class => 'label warning'}) unless user.confirmed? %></td>
+        <td>
+          <%= user.email %>
+          <%= content_tag(:span, 'Admin', {:class => 'label notice'}) if user.admin? %>
+          <%= content_tag(:span, 'Unconfirmed', {:class => 'label warning'}) unless user.confirmed? %>
+        </td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td>
           <%= link_to 'Edit', edit_admin_user_path(user), {:class => 'btn small primary edit_admin_user_link', :id => "user_#{user.id}"} %>
+          <%= link_to 'Delete', confirm_delete_admin_user_path(user), {:class => 'btn small secondary delete_admin_user', :id => "delete_user_#{user.id}"} %>
         </td>
       </tr>
     <% end %>

@@ -1,0 +1,27 @@
+<div class="page-header">
+    <h1>Delete User</h1>
+</div><!-- .page-header -->
+
+<div class="row">
+
+  <div class="span10">
+
+    <%= form_for @user, {:url => admin_user_path(@user), :method => :delete} do |f| %>
+
+        <p>Are you sure that you want to delete <strong><%= @user.email %></strong>'s account? Their account and all associated data will be lost.</p>
+
+        <div class="actions">
+          <%= button_tag "Confirm and Delete", {:id => 'confirm_delete', :class => 'btn primary'} %>
+          <%= link_to "Cancel", admin_users_path, {:class => 'btn secondary'} %>
+        </div>
+
+      </fieldset>
+
+    <% end %>
+
+  </div><!-- .span10 -->
+
+  <div class="span6">
+  </div><!-- .span6 -->
+
+</div><!-- .row -->

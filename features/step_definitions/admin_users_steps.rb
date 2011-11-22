@@ -57,7 +57,8 @@ Given /^I am on the admin users page$/ do
 end
 
 Given /^I choose to edit a user and update their account$/ do
-  link = page.find(:css, 'a.edit_admin_user_link:last')
+  save_and_open_page
+  link = page.find(:css, 'a.edit_admin_user_link')
   @edit_id = link['id'].split("_").last # returns id from user_13
   link.click
   @new_name = "Jerry"
@@ -69,3 +70,25 @@ Then /^their profile should be updated$/ do
   edited_user = User.find_by_id(@edit_id)
   assert_equal(@new_name, edited_user.first_name)
 end
+
+Given /^there are some users$/ do
+  (1..10).each do |i|
+    Factory.create(:valid_user, :email => "clone+#{i}@rocketfuel.com")
+  end
+  assert(User.all.count > 9)
+end
+
+Given /^I delete one$/ do
+  Factory.create(:valid_user, :email => 'deleted@rocketfuel.com')
+  visit admin_users_path
+  link = page.find(:css, 'a.delete_admin_user:last')
+  @delete_id = link['id'].split("_").last # returns id from delete_user_13
+  link.click
+  click_button('confirm_delete')
+end
+
+Then /^their account should be removed$/ do
+  assert_nil(User.find_by_id(@delete_id))
+end
+
+

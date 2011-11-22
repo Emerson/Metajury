@@ -33,3 +33,9 @@ Scenario: Admin Edit User Flow
   And I am on the admin users page
   And I choose to edit a user and update their account
   Then their profile should be updated
+
+Scenario: Admin Delete User Flow
+  Given I am logged in as an admin user
+  And there are some users
+  And I delete one
+  Then their account should be removed

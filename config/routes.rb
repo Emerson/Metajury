@@ -21,7 +21,11 @@ RocketFuel::Application.routes.draw do
   match 'account' => 'users#edit',   :as => 'account'
 
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        get 'confirm_delete'
+      end
+    end
     root :to => 'dashboard#index'
   end
 
