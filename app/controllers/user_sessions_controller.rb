@@ -24,6 +24,7 @@ class UserSessionsController < ApplicationController
       if @user
         session[:user_id] = @user.id
         flash[:success] = 'You have been logged in'
+        Feed.login_user(@user)
         if @user.admin?
           redirect_to admin_root_path
         else
@@ -40,6 +41,7 @@ class UserSessionsController < ApplicationController
 
 
   def logout
+    Feed.logout_user(@current_user) if @current_user
     session[:user_id] = nil
     session[:success] = 'You have been logged out'
     redirect_to root_path

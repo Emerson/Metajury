@@ -123,4 +123,33 @@ module ApplicationHelper
   end
 
 
+  def admin_feed_items(number = 10)
+    admin_items = Feed.where('admin = ? OR user_id = ?', true, @current_user.id).order('created_at DESC').limit(number)
+    html = Array.new
+    admin_items.each do |item|
+      feed_data = ActiveSupport::JSON.decode(item.data)
+      logger.info("FEED TYPE "+item.feed_type)
+      feed_message = sprintf(feed_text_for(item.feed_type), feed_data['first_name']) + " - " + content_tag(:span, time_ago_in_words(item.created_at))
+      html << content_tag(:p, feed_message.html_safe)
+    end
+    html.join("\n").html_safe
+  end
+
+
+  def feed_text_for(feed_type)
+    case feed_type
+      when 'user_login'
+        "%s logged in"
+      when 'user_logout'
+        "%s logged out"
+      when 'user_confirmation'
+        "%s confirmed their account"
+      when 'user_registration'
+        "%s registered an account"
+      else
+        "%s did something"
+    end
+  end
+
+
 end

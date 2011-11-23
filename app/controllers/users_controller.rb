@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user.user_level = 'user'
     if @user.save
       UserMailer.confirmation_email(@user).deliver
+      Feed.new_user(@user)
       render 'registration_steps'
     else
       render 'signup'
@@ -49,6 +50,7 @@ class UsersController < ApplicationController
     if @user
       UserMailer.confirmation_complete_email(@user).deliver
       @user.confirm!
+      Feed.confirm_user(@user)
     else
       redirect_to root_path, :notice => 'That token seems to be invalid'
     end
