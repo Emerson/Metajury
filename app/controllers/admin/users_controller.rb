@@ -5,7 +5,7 @@ class Admin::UsersController < ApplicationController
 
 
   def index
-    @users = User.all
+    @users = User.paginate(:page => params[:page], :per_page => 15).order(sort_column + " " + sort_direction).all
   end
 
 
@@ -53,7 +53,6 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    puts @current_user.inspect
     if @current_user.can_update?(@user)
       @user.destroy
       flash[:success] = "User successfully deleted"
@@ -64,5 +63,25 @@ class Admin::UsersController < ApplicationController
       return
     end
   end
+
+
+  private
+
+
+  def sort_column
+    if params[:sort].blank?
+      return 'email'
+    elsif params[:sort] == 'name'
+      return 'first_name'
+    else
+      return params[:sort]
+    end
+  end
+
+
+  def sort_direction
+    params[:direction] || 'asc'
+  end
+
 
 end

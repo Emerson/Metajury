@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
-    logger.info "current user: #{@current_user}"
     # Add a dynamic method for admin checks if needed
     unless @current_user
       def @current_user.admin?
@@ -16,16 +15,14 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    self.current_user
     if controller_path.match(/admin/i)
-      if @current_user.blank? or !@current_user.admin?
+      unless @current_user and @current_user.admin?
         flash[:error] = 'Oops, there seems to have been a problem'
         redirect_to root_path
         return
       end
     end
   end
-
 
   def use_admin_layout?
     controller_path.match(/admin/i) && @current_user.admin?

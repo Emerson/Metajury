@@ -26,7 +26,11 @@ class User < ActiveRecord::Base
     if user.blank?
       false
     else
-      user.update_attributes(:login_count => (user.login_count + 1), :reset_token => nil)
+      if user.login_count.is_a? Integer
+        user.update_attributes(:login_count => (user.login_count + 1), :reset_token => nil)
+      else
+        user.update_attributes(:login_count => 0, :reset_token => nil)
+      end
       user
     end
   end

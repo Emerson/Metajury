@@ -10,9 +10,9 @@
 
         <p>Are you sure that you want to delete <strong><%= @user.email %></strong>'s account? Their account and all associated data will be lost.</p>
 
-        <div class="actions">
-          <%= button_tag "Confirm and Delete", {:id => 'confirm_delete', :class => 'btn primary'} %>
-          <%= link_to "Cancel", admin_users_path, {:class => 'btn secondary'} %>
+        <div class="form-actions">
+          <%= button_tag "Confirm and Delete", {:id => 'confirm_delete', :class => 'btn btn-danger'} %>
+          <%= link_to "Cancel", admin_users_path, {:class => 'btn'} %>
         </div>
 
       </fieldset>
