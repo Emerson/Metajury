@@ -4,15 +4,15 @@ Rocket Fuel is a simple application bootstrap that helps you avoid coding repeti
 
 h3. Things currently included with Rocket-Fuel:
 
-*A handy **application_settings.yml** file that populates a globally accessible hash of configuration optons.
+* A handy **application_settings.yml** file that populates a globally accessible hash of configuration optons.
 
-*Some **basic test coverage**
+* Some **basic test coverage**
 
-*A **simple signup system** with email confirmations
+* A **simple signup system** with email confirmations
 
-*A **simple login system**, with logic to detect @current_user
+* A **simple login system**, with logic to detect @current_user
 
-*A **namespaced admin area** only usable by "admins" and "super-admins"
+* A **namespaced admin area** only usable by "admins" and "super-admins"
 
 * **Forgotten password** functionality
 
@@ -20,4 +20,4 @@ h3. Things currently included with Rocket-Fuel:
 
 * **Basic HTML and text email templates** for account interactions
 
-*The beginnings of a **news feed**
+* The beginnings of a **news feed**
