@@ -5,49 +5,25 @@
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <style type="text/css">
-  body {
-    padding-top: 60px;
-  }
-  </style>
 </head>
 <body>
 
-<div class="topbar">
-    <div class="fill">
+<!-- Top Navbar -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
         <div class="container">
-
-            <%= link_to ApplicationSettings.config['application_name'], root_path, {:class => 'brand'} %>
-
-            <ul class="nav">
-                <%= user_nav %>
-            </ul>
-
-    <% if current_user == nil %>
-        <%= form_tag login_path, {:class => 'login pull-right'} do %>
-            <%= text_field_tag :email, '', {:class => 'input-small', :placeholder => 'email'} %>
-            <%= password_field_tag :password, '', {:class => 'input-small', :placeholder => 'password'} %>
-            <%= button_tag 'login', {:type => 'submit', :class => 'btn'} %>
-        <% end %>
-    <% else %>
-            <span class='pull-right'>
-            <ul class="nav">
-                <%= content_tag(:li, link_to('Admin', admin_root_path)) if current_user && @current_user.admin? %>
-                <li><%= link_to 'Logout', logout_path, {:class => 'logout', :id => 'logout'} %></li>
-            </p>
-            </span>
-    <% end %>
-    
+          <%= render 'layouts/navbar' %>
         </div><!-- .container -->
-    </div><!-- .fill -->
-</div><!-- .topbar -->
+    </div><!-- .navbar-inner -->
+</div><!-- .navbar-fixed-top -->
+
 
 <div class="container">
 
     <% flash.each do |name, msg| %>
         <% if msg.is_a?(String) %>
-            <div class="alert-message <%= name %>" id="flash_<%= name %>">
-                <a class="close" href="#">×</a>
+            <div class="alert-message alert-<%= name %> alert" id="flash_<%= name %>">
+                <a class="close" href="#" data-dismiss="alert">&times;</a>
                 <%= msg %>
             </div><!-- .alert-message -->
         <% end %>
@@ -55,8 +31,8 @@
 
     <%= yield %>
 
-    <footer>
-        Copyright &copy;<%= Time.now.year %>
+    <footer class="footer">
+        <p class="pull-right"><em>Copyright &copy;<%= Time.now.year %></em></p>
     </footer>
 
 </div>

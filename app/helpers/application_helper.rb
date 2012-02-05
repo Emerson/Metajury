@@ -29,7 +29,7 @@ module ApplicationHelper
          html[key] = 'error_explanation'
        end
      end
-     html[:class] << ' alert-message block-message'
+     html[:class] << ' alert-error alert block-message'
 
      options[:object_name] ||= params.first
 
@@ -72,6 +72,18 @@ module ApplicationHelper
     end
     end
 
+
+  def error_class_for(object, property)
+    if object.errors.include?(property)
+      "error"
+    end
+  end
+
+  def error_message_for(object, property)
+    if object.errors.include?(property)
+      "<span class='help-inline'>#{property.to_s.humanize} #{object.errors[property].first}</span>".html_safe
+    end
+  end
 
   # A quick helper to output bootstrap buttons
   def bootstrap_button(text, *params)

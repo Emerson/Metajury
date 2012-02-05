@@ -2,20 +2,34 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require css/bootstrap.css
  *= require_self
  *= require_tree . 
 */
 
-#header {
-  padding: 10px 0;
-  margin: 0 0 10px 0;
-  border-bottom: 1px solid #ccc;
-}
 
 /*
  * Bootstrap Customizations are minimal, but required for particular areas
  *
 */
+
+body {
+  padding-top: 60px;
+}
+
+.navbar form {
+	margin-bottom: 0;
+}
+.navbar input {
+	margin-top: 5px;
+}
+
 .admin_users td {
    vertical-align: middle;
+}
+
+.footer {
+	margin-top: 25px;
+	padding: 25px 0 25px;
+	border-top: 1px solid #E5E5E5;
 }

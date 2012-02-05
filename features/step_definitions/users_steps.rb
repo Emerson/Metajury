@@ -130,12 +130,12 @@ Then /^my account changes should be reflected$/ do
 end
 
 Given /^I try to update another persons account$/ do
-  another_user = Factory.create(:valid_user)
-  visit edit_user_path(another_user.id)
+  another_user = Factory.create(:valid_user, :email => 'another@user.comrake')
+  visit edit_user_path(another_user)
 end
 
 Then /^I should see an error$/ do
-  assert page.has_selector?('.error')
+  assert page.has_selector?('.alert-error')
 end
 
 Given /^I have a user with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|

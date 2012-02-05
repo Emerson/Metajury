@@ -7,7 +7,8 @@ end
 FactoryGirl.define do
 
   factory :user do
-    first_name 'Mr. Clone'
+    first_name 'John'
+    last_name 'Smith'
     email "clone#{FactoryGirl.generate(:unique_name)}@factory.com"
     password  'password'
   end
@@ -18,6 +19,7 @@ FactoryGirl.define do
     confirmed true
     token false
     first_name 'Mr. Admin'
+    last_name 'Adminis'
     user_level 'admin'
     login_count 0
   end
@@ -28,6 +30,7 @@ FactoryGirl.define do
     confirmed true
     token false
     first_name 'Mr. Admin'
+    last_name 'Superious'
     user_level 'super-admin'
     login_count 0
   end
@@ -36,6 +39,7 @@ FactoryGirl.define do
     email "valid-user-#{FactoryGirl.generate(:unique_name)}@factory.com"
     password 'password'
     first_name 'Mr. Valid'
+    last_name 'Validiously'
     user_level 'user'
     login_count 0
     token false
@@ -46,6 +50,7 @@ FactoryGirl.define do
     email 'unconfirmed@factory.com'
     password 'password'
     first_name 'Mr. Unconfirmed'
+    last_name "Unconfirmious"
     user_level 'user'
     login_count 0
     confirmed false

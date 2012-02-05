@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20111123034243) do
     t.string   "feed_type"
     t.boolean  "admin"
     t.boolean  "public_feed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20111123034243) do
     t.datetime "last_login_time"
     t.string   "token"
     t.boolean  "confirmed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "user_level"
     t.string   "password"
     t.string   "reset_token"

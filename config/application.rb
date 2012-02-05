@@ -45,6 +45,9 @@ module RocketFuel
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Now using Bootstrap 2.0
+    config.assets.paths << Rails.root.join("vendor", "assets", "bootstrap-2.0")
+
     # Override the default field_with_errors (uncomment)
     # config.action_view.field_error_proc = Proc.new { |html_tag, instance| "#{html_tag}".html_safe }
   end

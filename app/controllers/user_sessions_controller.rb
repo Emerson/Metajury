@@ -21,6 +21,7 @@ class UserSessionsController < ApplicationController
       # at the moment it just returns the user, or false. We need
       # a method of indicating the reason why the login failed
       @user = User.login(params[:email], params[:password])
+      logger.info params.inspect
       if @user
         session[:user_id] = @user.id
         flash[:success] = 'You have been logged in'

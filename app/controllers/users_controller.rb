@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
 
   def update
-    @user = current_user
+    @user = @current_user
     # Ensure that users have not tried to alter their user_level
     params[:user][:user_level] = 'user' unless @user.admin? || params[:user].blank?
     if @user.update_attributes(params[:user])
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
 
   def edit
-    @user = current_user
+    @user = @current_user
     if params[:id] && params[:id] != @user.id
       flash[:error] = 'There was an error trying to edit that user'
       redirect_to root_path

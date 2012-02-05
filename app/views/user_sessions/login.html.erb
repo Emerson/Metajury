@@ -4,40 +4,39 @@
 
 <div class="row">
 
-  <div class="span10">
+  <div class="span12">
 
-    <%= form_tag login_path, {:class => 'login'} do %>
+    <%= form_tag login_path, {:class => 'login form-horizontal'} do %>
 
       <fieldset>
 
-        <div class="clearfix">
-          <%= label_tag 'Email' %>
-          <div class="input">
-            <%= text_field_tag :email, '', {:class => 'xLarge'} %>
-          </div>
-        </div>
+          <div class="control-group">
+            <%= label_tag 'email', 'Email', :class => 'control-label' %>
+            <div class="controls">
+              <%= text_field_tag :email, '', {:class => 'input-xlarge'} %>
+            </div><!-- .controls -->
+          </div><!-- .control-group -->
 
-        <div class="clearfix">
-          <%= label_tag 'Password' %>
-          <div class="input">
-            <%= password_field_tag :password, '', {:class => 'xLarge'} %>
-            <span class="help-block">
-              <%= link_to 'Forgot Password?', request_password_reset_path %>
-            </span>
-          </div>
-        </div>
+          <div class="control-group">
+            <%= label_tag 'password', 'Password', :class => 'control-label' %>
+            <div class="controls">
+              <%= password_field_tag :password, '', {:class => 'input-xlarge'} %>
+              <p class="help-block">
+                <%= link_to 'Forgot Password?', request_password_reset_path %>
+              </p>
+            </div><!-- .controls -->
+          </div><!-- .control-group -->
 
-        <div class="actions">
-          <%= button_tag "Login", {:id => 'login', :class => 'btn primary'} %>
+        <div class="form-actions">
+          <%= button_tag "Login", {:id => 'login', :class => 'btn btn-primary'} %>
+          &nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;
+          <%= link_to 'Signup', signup_path, {:id => 'signup-btn', :class => 'btn '} %>
         </div>
 
       </fieldset>
 
     <% end %>
 
-  </div><!-- .span10 -->
-
-  <div class="span6">
-  </div><!-- .span6 -->
+  </div><!-- .span12 -->
 
 </div><!-- .row -->

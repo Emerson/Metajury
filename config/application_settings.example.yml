@@ -10,7 +10,8 @@ development:
   system_reply_email: you@gmail.com
   application_name: Rocket Fuel
   host: 'localhost:3000'
-  suppress_asset_logging: true
+  quiet_assets: true
+
 
 test:
   user_registration: true
@@ -18,7 +19,7 @@ test:
   system_reply_email: you@gmail.com
   application_name: Rocket Fuel
   host: 'localhost:3000'
-  suppress_asset_logging: true
+  quiet_assets: true
 
 production:
   user_registration: true
@@ -26,4 +27,4 @@ production:
   system_reply_email: you@gmail.com
   application_name: Rocket Fuel
   host: 'localhost:3000'
-  suppress_asset_logging: true
+  quiet_assets: true

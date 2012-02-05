@@ -2,85 +2,78 @@
     <h1>Add User</h1>
 </div><!-- .page-header -->
 
-<ul class="pills">
+<ul class="nav nav-tabs">
   <li><%= link_to 'All Users', admin_users_path, {:id => 'admin_users'} %></li>
   <li class="active"><%= link_to 'New User', new_admin_user_path, {:id => 'new_admin_user'} %></li>
 </ul>
 
 <div class="row">
 
-  <div class="span10">
+  <div class="span12">
 
-    <%= form_for @user, {:url => admin_users_path} do |f| %>
-
-    <%= bootstrap_errors(@user, {
-          :header_message => 'There was a problem adding the user:',
-          :class => 'error'
-        })
-    %>
+    <%= form_for @user, {:url => admin_users_path, :html => {:class => 'form-horizontal'}} do |f| %>
 
       <fieldset>
 
-        <div class="clearfix">
+        <div class="control-group <%= error_class_for(f.object, :email) %>">
           <%= f.label :email %>
-          <div class="input">
-            <%= f.text_field :email, {:class => 'xLarge', :value => @user.email} %>
+          <div class="controls">
+            <%= f.text_field :email, {:class => 'input-xlarge', :value => @user.email} %>
+            <%= error_message_for(f.object, :email) %>
           </div>
         </div>
 
-        <div class="clearfix">
+        <div class="control-group <%= error_class_for(f.object, :password) %>">
           <%= f.label :password %>
-          <div class="input">
-            <%= f.password_field :password, {:class => 'xLarge'} %>      
+          <div class="controls">
+            <%= f.password_field :password, {:class => 'input-xlarge'} %>
+            <%= error_message_for(f.object, :password) %>
           </div>
         </div>
 
-        <div class="clearfix">
+        <div class="control-group <%= error_class_for(f.object, :first_name) %>">
           <%= f.label :first_name %>
-          <div class="input">
-            <%= f.text_field :first_name, {:class => 'xLarge', :value => @user.first_name} %>
+          <div class="controls">
+            <%= f.text_field :first_name, {:class => 'input-xlarge', :value => @user.first_name} %>
+            <%= error_message_for(f.object, :first_name) %>
           </div>
         </div>
 
-        <div class="clearfix">
+        <div class="control-group <%= error_class_for(f.object, :last_name) %>">
           <%= f.label :last_name %>
-          <div class="input">
-            <%= f.text_field :last_name, {:class => 'xLarge', :value => @user.last_name} %>
+          <div class="controls">
+            <%= f.text_field :last_name, {:class => 'input-xlarge', :value => @user.last_name} %>
+            <%= error_message_for(f.object, :last_name) %>
           </div>
         </div>
 
-        <div class="clearfix">
+        <div class="control-group">
           <%= f.label :user_level %>
-          <div class="input">
+          <div class="controls">
           <%= select(:user, :user_level, User.user_levels) %>
           </div>
         </div>
         
 
         <div class="clearfix">  
-          <div class="input">
-            <ul class="inputs-list">
-              <li>
-                <label for="user_send_password">
-                  <%= f.check_box :send_password %>
-                  <span>Email this user their password</span>
-                </label>
-              </li>
-            </ul>
+          <div class="controls">
+            <label class="checkbox" for="user_send_password">
+              <%= f.check_box :send_password %> Email this user their password
+            </label>
+            <label class="checkbox" for="user_confirmed">
+              <%= f.check_box :confirmed %> Account Confirmed?
+            </label>
           </div>
         </div>
 
-        <div class="actions">
-          <%= button_tag "Add User", {:id => 'signup', :class => 'btn primary'} %>
+        <div class="form-actions">
+          <%= button_tag "Add User", {:id => 'signup', :class => 'btn btn-primary'} %>
         </div>
 
       </fieldset>
 
     <% end %>
 
-  </div><!-- .span10 -->
-
-  <div class="span6">
-  </div><!-- .span6 -->
+  </div><!-- .span12 -->
 
 </div><!-- .row -->

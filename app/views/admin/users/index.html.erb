@@ -2,12 +2,12 @@
     <h1>All Users</h1>
 </div><!-- .page-header -->
 
-<ul class="pills">
+<ul class="nav nav-tabs">
   <li class="active"><%= link_to 'All Users', admin_users_path, {:id => 'admin_users'} %></li>
   <li><%= link_to 'New User', new_admin_user_path, {:id => 'new_admin_user'} %></li>
 </ul>
 
-<table class="zebra-striped admin_users">
+<table class="table table-striped admin_users">
   <thead>
     <tr>
       <th class='email'>Email</th>
@@ -21,14 +21,16 @@
       <tr>
         <td>
           <%= user.email %>
-          <%= content_tag(:span, 'Admin', {:class => 'label notice'}) if user.admin? %>
-          <%= content_tag(:span, 'Unconfirmed', {:class => 'label warning'}) unless user.confirmed? %>
+          <%= content_tag(:span, 'Admin', {:class => 'label label-success'}) if user.admin? %>
+          <%= content_tag(:span, 'Unconfirmed', {:class => 'label label-warning'}) unless user.confirmed? %>
         </td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td>
-          <%= link_to 'Edit', edit_admin_user_path(user), {:class => 'btn small primary edit_admin_user_link', :id => "user_#{user.id}"} %>
-          <%= link_to 'Delete', confirm_delete_admin_user_path(user), {:class => 'btn small secondary delete_admin_user', :id => "delete_user_#{user.id}"} %>
+          <span class="pull-right">
+          <%= link_to 'Edit', edit_admin_user_path(user), {:class => 'btn small btn-primary edit_admin_user_link', :id => "user_#{user.id}"} %>
+          <%= link_to 'Delete', confirm_delete_admin_user_path(user), {:class => 'btn small delete_admin_user', :id => "delete_user_#{user.id}"} %>
+          </span>
         </td>
       </tr>
     <% end %>

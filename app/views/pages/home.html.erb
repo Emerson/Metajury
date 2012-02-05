@@ -1,17 +1,7 @@
 <div id="home" class="home content">
 
 
-  <% if current_user == nil %>
-
-    <div class="page-header">
-      <h1>Login to Continue</h1>
-    </div><!-- .page-header -->
-
-    <p>
-    If you are seeing this content, it means that you are currently logged out of the application. In order to continue, you'll need to signup, or have an administrator create an account for you.
-    </p>
-
-  <% else %>
+  <% if @current_user %>
 
     <div class="page-header">
       <h1>Welcome!</h1>
@@ -20,6 +10,49 @@
     <p>
     This content is only visible if you are logged into the application. Users who do not have accounts will be unable to view this message and will need to either signup, or have an administrator create an account for them.
     </p>
+  
+  <% else %>
+
+    <div class="page-header">
+      <h1>Welcome to Rocket Fuel!</h1>
+    </div><!-- .page-header -->
+
+    <p>
+    Rocket Fuel is a simple application bootstrap that helps you avoid coding repetitive tasks. In an attempt to avoid too much magic, Rocket Fuel development avoids the use of gems, opting for simple and clean in-application logic. At the moment, Rocket Fuel uses <strong>Twitter Bootstrap 2.0</strong> for the presentation layer. This seems like the best option, as it provides sensible, minimal markup, while allowing for easy customization by future developers.
+    </p>
+
+    <h3>Things currently included with Rocket-Fuel:</h3>
+
+    <ul>
+      <li>
+        A handy <strong>application_settings.yml</strong> file that populates a globally accessible hash of configuration optons.
+      </li>
+      <li>
+        Some <strong>basic test coverage</strong>
+      </li>
+      <li>
+        A <strong>simple signup system</strong> with email confirmations
+      </li>
+      <li>
+        A <strong>simple login system</strong>, with logic to detect @current_user
+      </li>
+      <li>
+        A <strong>namespaced admin area</strong> only usable by "admins" and "super-admins"
+      </li>
+      <li>
+        <strong>Forgotten password</strong> functionality
+      </li>
+      <li>
+        <strong>Inline validation errors</strong>, using Bootstraps nice style
+      </li>
+      <li>
+        <strong>Basic HTML and text email templates</strong> for account interactions
+      </li>
+      <li>
+        The beginnings of a <strong>news feed</strong>
+      </li>
+    <ul>
+
 
   <% end %>
 
