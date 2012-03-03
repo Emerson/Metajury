@@ -67,7 +67,7 @@ FactoryGirl.define do
     item_id nil
     user_id nil
     group_id nil
-    type 'up'
+    vote_type 'up'
   end
 
   factory :valid_submission, :class => Submission do

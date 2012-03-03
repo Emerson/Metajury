@@ -19,6 +19,17 @@ class User < ActiveRecord::Base
   # Relationships
   has_many :votes
   has_many :submissions
+  accepts_nested_attributes_for :votes
+
+
+  # vote(:type, submission)
+  # =======================
+  # Adds a vote of the passed type to the provided submission object.
+  # Returns false if the record is not valid
+  def vote(type, submission)
+    vote = self.votes.build(:type => type.to_s)
+    vote.save
+  end
 
 
   # self.login(email, password)
