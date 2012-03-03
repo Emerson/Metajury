@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
   attr_accessor :send_password
 
 
+  # Relationships
+  has_many :votes
+  has_many :submissions
+
+
   # self.login(email, password)
   # ======================
   # Returns the users record if it's a valid login, otherwise

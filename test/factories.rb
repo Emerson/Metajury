@@ -1,7 +1,13 @@
 FactoryGirl.define do
+
   sequence :unique_name do |n|
     "mr-firstname-#{n}"
   end
+
+  sequence :unique_title do |n|
+    "Awesome Store - #{n}"
+  end
+
 end
 
 FactoryGirl.define do
@@ -55,6 +61,21 @@ FactoryGirl.define do
     login_count 0
     confirmed false
     token 'fh135aaa'
+  end
+
+  factory :vote, :class => Vote do
+    item_id nil
+    user_id nil
+    group_id nil
+    type 'up'
+  end
+
+  factory :valid_submission, :class => Submission do
+    user_id 1
+    title FactoryGirl.generate(:unique_name)
+    url 'http://www.emersonlackey.com'
+    vote_tally 28
+    description "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum, leo eget varius rhoncus, neque magna tempor ligula, ut posuere nibh felis sit amet metus. Nulla elementum cursus justo ac ullamcorper. Curabitur non enim eget sem pretium placerat. Cras viverra tempus erat, eget ornare augue tincidunt eu. Pellentesque eget arcu nisl, iaculis facilisis erat. Suspendisse ullamcorper urna sed turpis bibendum placerat. Aenean dapibus tincidunt orci quis viverra. Aenean faucibus enim vel metus laoreet ultrices."
   end
 
   # This will use the User class (Admin would have been guessed)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123034243) do
+ActiveRecord::Schema.define(:version => 20120303191149) do
 
   create_table "feeds", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(:version => 20111123034243) do
     t.string   "feed_type"
     t.boolean  "admin"
     t.boolean  "public_feed"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "submissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.string   "url"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "vote_tally"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -37,6 +48,15 @@ ActiveRecord::Schema.define(:version => 20111123034243) do
     t.string   "user_level"
     t.string   "password"
     t.string   "reset_token"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.string   "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
