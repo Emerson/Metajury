@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   # Adds a vote of the passed type to the provided submission object.
   # Returns false if the record is not valid
   def vote(type, submission)
-    vote = self.votes.build(:type => type.to_s)
+    vote = self.votes.build(:vote_type => type.to_s, :item_id => submission.id)
     vote.save
   end
 

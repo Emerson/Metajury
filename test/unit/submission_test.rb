@@ -25,4 +25,28 @@ class SubmissionTest < ActiveSupport::TestCase
 		vote = user.vote(:up, submission)
 	end
 
+	test "self.total_votes should return fresh vote count" do
+		# Add thirty up votes to a submission
+		submission = Factory.create(:valid_submission)
+		counter = 0
+		(10..40).each do |i|
+			user = Factory.create(:valid_user, :email => "upvoter-#{i}@metajury.com")
+			counter = counter + 1
+			user.vote(:up, submission)
+		end
+		assert(submission.total_votes === counter, "Votes: #{submission.total_votes.inspect}, should be #{counter}")
+	end
+
+	test "self.up_votes should return a fresh 'up' vote count" do
+		# Add thirty up votes to a submission
+		submission = Factory.create(:valid_submission)
+		counter = 0
+		(40..70).each do |i|
+			user = Factory.create(:valid_user, :email => "upvoter-#{i}@metajury.com")
+			counter = counter + 1
+			user.vote(:up, submission)
+		end
+		assert(submission.total_up_votes === counter, "Votes: #{submission.total_votes.inspect}, should be #{counter}")
+	end
+
 end
