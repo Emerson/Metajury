@@ -5,7 +5,7 @@ class Submission < ActiveRecord::Base
 
   # Associations
   belongs_to :user
-  has_many :votes, :foreign_key => :item_id
+  has_many :votes, :foreign_key => :item_id, :dependent => :destroy
 
   # total_votes
   # ===========

@@ -53,6 +53,14 @@ Given /^user signups are active$/ do
   assert ApplicationSettings.config['user_registration']
 end
 
+Given /^I am a logged in user with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
+  Factory.create(:valid_user, :email => email, :password => password)
+  visit root_path
+  fill_in 'email', :with => email
+  fill_in 'password', :with => password
+  click_button('login')
+end
+
 Given /^I register with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
   user = Factory.build(:valid_user, :email => email)
   visit signup_path

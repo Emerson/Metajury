@@ -1,0 +1,10 @@
+<ul>
+<% @submissions.each do |submission| %>
+
+	<li>
+		<h4><%= link_to submission.title, submission.url, {:target => '_blank'} %></h4>
+		<p><%= submission.description %></p>
+	</li>
+
+<% end %>
+</ul>

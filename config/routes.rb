@@ -20,6 +20,13 @@ RocketFuel::Application.routes.draw do
   match 'signup'  => 'users#signup', :as => 'signup' if ApplicationSettings.config['user_registration']
   match 'account' => 'users#edit',   :as => 'account'
 
+  # Submission Routes
+  resources :submissions do
+  end
+
+  # User submissions
+  match 'my-submissions' => 'submissions#user_submissions', :as => 'user_submissions'
+
   namespace :admin do
     resources :users do
       member do

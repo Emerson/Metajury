@@ -61,4 +61,11 @@ class SubmissionTest < ActiveSupport::TestCase
     assert(submission.total_down_votes === counter, "Votes: #{submission.total_votes.inspect}, should be #{counter}")
   end
 
+  test "destroying a submission should destroy any associated votes" do
+    submission = Factory.create(:valid_submission)
+    vote = Vote.create(:item_id => submission.id, :user_id => 1)
+    submission.destroy
+    assert(Vote.where(:item_id => submission.id).all.count === 0, "Associated vote was not destroyed")
+  end
+
 end

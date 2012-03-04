@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h1>Add a Submission <small> for <%= @current_user.email %></small></h1>
+</div><!-- .page-header -->
+
+<div class="row">
+
+  <div class="span12">
+
+    <%= form_for @submission, {:html => {:class => 'form-horizontal'}} do |f| %>
+
+      <fieldset>
+
+        <div class="control-group <%= error_class_for(f.object, :url) %>">
+          <%= f.label :url, 'Link', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :url, {:class => 'input-xlarge'} %>
+            <%= error_message_for(f.object, :url) %>
+            <p class="help-block">eg. http://www.google.com</p>
+          </div><!-- .controls -->
+        </div><!-- .control-group -->
+
+        <div class="control-group <%= error_class_for(f.object, :title) %>">
+          <%= f.label :title, 'Title', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :title, {:class => 'input-xlarge'} %>
+            <%= error_message_for(f.object, :title) %>
+            <p class="help-block">A catchy title...</p>
+          </div><!-- .controls -->
+        </div><!-- .control-group -->
+
+        <div class="control-group <%= error_class_for(f.object, :description) %>">
+          <%= f.label :description, 'Description', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_area :description, {:class => 'input-xlarge'} %>
+            <%= error_message_for(f.object, :description) %>
+            <p class="help-block">A little more information about your submission</p>
+          </div><!-- .controls -->
+        </div><!-- .control-group -->
+
+        <div class="form-actions">
+          <%= f.submit "Add Submission", {:class => 'btn btn-primary'} %>
+          &nbsp;&nbsp;<em>or</em>&nbsp;&nbsp;
+          <%= link_to 'Cancel', :back, {:class => 'btn '} %>
+        </div>
+
+      </fieldset>
+
+    <% end %>
+
+  </div><!-- .span12 -->
+
+</div><!-- .row -->
