@@ -1,7 +1,29 @@
 <div id="home" class="home content" data-homepage="logged-out">
 
     <div class="page-header">
-      <h1>Top Links</h1>
+      <h1>Top Submissions</h1>
     </div><!-- .page-header -->
+
+    <div class="row">
+
+      <div class="span9">
+        <% if @submissions.empty? %>
+          <p>Oh my, there are currently no links worth showing on the homepage. Why not <%= link_to 'signup', signup_path %> and submit one.</p>
+        <% else %>
+          <%= render :partial => 'submissions/submissions', :collection => @submissions %>
+        <% end %>
+      </div>
+
+      <div class="span3">
+        <h3>Signup and Have Your Say!</h3>
+        <p>
+          Signing up to metajury is quick and easy. Once your a member you can
+          start submitting and voting on content, connecting with your friends, 
+          and taking part in discussions.
+        </p>
+        <p><%= link_to 'Signup Now!', signup_path, :class => 'btn btn-primary' %></p>
+      </div>
+
+    </div><!-- .row -->
 
 </div><!-- .homepage -->

@@ -14,4 +14,13 @@ class VoteTest < ActiveSupport::TestCase
 		assert(!second_vote.valid?, "First vote was: #{first_vote.inspect}\nSecond vote was: #{second_vote.inspect}")
 	end
 
+	test "A user should be able to change their vote from up to abstain" do
+		user = Factory.create(:valid_user)
+		submission = Factory.create(:valid_submission)
+		user.vote(:up, submission)
+	end
+
+	test "A user should be able to change their vote from neutral to down" do
+	end
+
 end

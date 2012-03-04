@@ -29,4 +29,11 @@ class Submission < ActiveRecord::Base
     self.votes.are(:down).count
   end
 
+  # total_abstain_votes
+  # ===================
+  # Returns a count of abstained votes
+  def total_abstain_votes
+    self.votes.are(:abstain).count
+  end
+
 end
