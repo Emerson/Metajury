@@ -37,6 +37,10 @@ body {
 	position: relative;
 	left: -30px;
 }
+.small-link, .small-link:visited {
+	color: #999;
+	text-decoration: underline;
+}
 .vote-panel {
 	width: 30px;
 	height: 64px;

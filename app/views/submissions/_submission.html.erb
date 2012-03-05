@@ -29,11 +29,11 @@ end
 
     <div class="span7 submission-information">
 	  <h4><%= link_to submission.title, submission.url, {:target => '_blank'} %></h4>
-      <p><small>submitted <%= time_ago_in_words(submission.created_at) %> by 
+      <p><small><%= link_to submission.friendly_url, submission.friendly_url, :class => 'small-link' %> – submitted <%= time_ago_in_words(submission.created_at) %> ago by 
         <% if submission.user.blank? # TODO: Fix this as it was causing issues with testing %>
-        unknown
+        unknown 
         <% else %>
-            <%= submission.user.first_name %>
+            <%= submission.user.first_name %> 
         <% end %>
     </small></p>
 	  <p><%= submission.description %></p>
