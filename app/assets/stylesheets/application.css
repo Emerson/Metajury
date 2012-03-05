@@ -101,9 +101,14 @@ body {
 	background-position: 0px 0px;
 }
 
+.vote-panel .down.voted {
+	background-position: 0px -30px;
+}
+
 .vote-panel .up.voted:hover {
 	background-position: -16px 0px;
 }
+
 .footer {
 	margin-top: 25px;
 	padding: 25px 0 25px;

@@ -54,7 +54,7 @@ Given /^user signups are active$/ do
 end
 
 Given /^I am a logged in user with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
-  Factory.create(:valid_user, :email => email, :password => password)
+  @current_user = Factory.create(:valid_user, :email => email, :password => password)
   visit root_path
   fill_in 'email', :with => email
   fill_in 'password', :with => password

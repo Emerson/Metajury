@@ -30,7 +30,8 @@ Then /^the root_path of metajury should be our homepage$/ do
 end
 
 Given /^there is a valid submission$/ do
-  Factory.create(:valid_submission)
+  user = Factory.create(:valid_user)
+  Factory.create(:valid_submission, :user_id => user.id)
 end
 
 Given /^I upvote a valid submission$/ do
@@ -66,4 +67,15 @@ end
 
 Then /^I should see an error message about already voting$/ do
   assert page.has_content?('only upvote a submission once')
+end
+
+Given /^I upvote and then downvote a submission$/ do
+  @flopper_id = page.find('.submission:first')['data-submission-id']
+  click_link("submission-#{@flopper_id}-upvote")
+  click_link("submission-#{@flopper_id}-downvote")
+end
+
+Then /^my vote should be removed from the submission$/ do
+  vote_count = Vote.where(:user_id => @current_user.id, :item_id => @flopper_id).count
+  assert(vote_count == 0, "The vote count was #{vote_count} instead of 0")
 end

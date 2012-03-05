@@ -33,10 +33,17 @@ Scenario: Down vote a submission
   And I downvote a valid submission
   Then the submission should lose a vote
 
-@submission
 Scenario: Users cannot double upvote
   Given I am a logged in user with the email "double-upvoter@metajury.com" and the password "password"
   And there is a valid submission
   And I am on the homepage
   And I upvote a valid submission twice
   Then I should see an error message about already voting
+
+@submission
+Scenario: Users can remove an upvote
+  Given I am a logged in user with the email "flipflopper@metajury.com" and the password "password"
+  And there is a valid submission
+  And I am on the homepage
+  And I upvote and then downvote a submission
+  Then my vote should be removed from the submission

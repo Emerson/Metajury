@@ -1,17 +1,1 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  user_id: 1
-  group_id: 1
-  url: MyString
-  title: MyString
-  description: MyText
-  vote_tally: 1
-
-two:
-  user_id: 1
-  group_id: 1
-  url: MyString
-  title: MyString
-  description: MyText
-  vote_tally: 1

@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
   # Adds a vote of the passed type to the provided submission object.
   # Returns false if the record is not valid
   def vote(type, submission)
+    current_vote = self.votes.where(:item_id => submission.id).first
+    if current_vote and current_vote.vote_type != type.to_s
+      current_vote.destroy
+    end
     vote = self.votes.build(:vote_type => type.to_s, :item_id => submission.id)
     vote.save
   end
@@ -36,7 +40,7 @@ class User < ActiveRecord::Base
   # =========================
   # Returns true if a user has already voted for a given type
   def voted?(type, submission)
-    !self.votes.where(:vote_type => type.to_s).empty?
+    !self.votes.where(:vote_type => type.to_s, :item_id => submission.id).empty?
   end
 
 
