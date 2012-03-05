@@ -82,4 +82,9 @@ class SubmissionTest < ActiveSupport::TestCase
     assert(user.voted?(:up, submission))
   end
 
+  test "user.friendly_url should return a url without the path" do
+    submission = Factory.create(:valid_submission, :url => 'http://www.example.com/example?i=13531')
+    assert(submission.friendly_url === 'http://www.example.com', "Output was: #{submission.friendly_url}")
+  end
+
 end

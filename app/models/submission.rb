@@ -36,4 +36,12 @@ class Submission < ActiveRecord::Base
     self.votes.are(:abstain).count
   end
 
+  # friendly_url
+  # ============
+  # Returns a friendly URL from a URL with a long path
+  def friendly_url
+    uri = URI(url)
+    uri.scheme + "://" + uri.host
+  end
+
 end
