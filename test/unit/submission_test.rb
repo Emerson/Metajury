@@ -25,6 +25,13 @@ class SubmissionTest < ActiveSupport::TestCase
     vote = user.vote(:up, submission)
   end
 
+  test "user.submission.vote(:type, submission_object) should return false if a user double votes" do
+    user = Factory.create(:valid_user, :id => 5530873153)
+    submission = Factory.create(:valid_submission)
+    vote = user.vote(:up, submission)
+    assert(!user.vote(:up, submission))
+  end
+
   test "self.total_votes should return fresh vote count" do
     # Add thirty up votes to a submission
     submission = Factory.create(:valid_submission)
@@ -66,6 +73,13 @@ class SubmissionTest < ActiveSupport::TestCase
     vote = Vote.create(:item_id => submission.id, :user_id => 1)
     submission.destroy
     assert(Vote.where(:item_id => submission.id).all.count === 0, "Associated vote was not destroyed")
+  end
+
+  test "user.voted?(:type, submission) should return true if a user has already voted" do
+    submission = Factory.create(:valid_submission)
+    user = Factory.create(:valid_user)
+    user.vote(:up, submission)
+    assert(user.voted?(:up, submission))
   end
 
 end

@@ -32,6 +32,14 @@ class User < ActiveRecord::Base
   end
 
 
+  # voted?(:type, submission)
+  # =========================
+  # Returns true if a user has already voted for a given type
+  def voted?(type, submission)
+    !self.votes.where(:vote_type => type.to_s).empty?
+  end
+
+
   # self.login(email, password)
   # ======================
   # Returns the users record if it's a valid login, otherwise

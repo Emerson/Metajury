@@ -31,4 +31,33 @@ class SubmissionsController < ApplicationController
   def destroy
   end
 
+  def upvote
+    session[:return_to] ||= request.referer
+    @submission = Submission.find(params[:id])
+    if @current_user.vote(:up, @submission)
+      flash[:notice] = "You have upvoted a story"
+    else
+      if @current_user.voted?(:up, @submission)
+        flash[:alert] = "You can only upvote a submission once"
+      else
+        flash[:alert] = "You cannot upvote that story"
+      end
+    end
+    redirect_to session[:return_to]
+  end
+
+  def downvote
+    session[:return_to] ||= request.referer
+    @submission = Submission.find(params[:id])
+    if @current_user.vote(:down, @submission)
+      flash[:notice] = "You have upvoted a story"
+    else
+      if @current_user.voted?(:down, @submission)
+        flash[:alert] = "You can only downvote a submission once"
+      else
+        flash[:alert] = "You cannot downvote that story"
+      end
+    end
+    redirect_to session[:return_to]
+  end
 end

@@ -1,0 +1,29 @@
+    <% 
+    active_class_upvote = @current_user.voted?(:up, submission) ? 'voted' : ''
+    active_class_downvote = @current_user.voted?(:down, submission) ? 'voted' : ''
+    %>
+	<div class="row submission" id="submission-<%= submission.id %>"
+                                data-submission-id="<%= submission.id %>"
+                                data-submission-upvotes="<%= submission.total_up_votes %>"
+                                data-submission-downvotes="<%= submission.total_down_votes%>">
+		<div class="votes span2">
+            <div class="vote-panel">
+                <%= link_to 'Vote Up', upvote_path(submission), {:id => "submission-#{submission.id}-upvote", :class => "up #{active_class_upvote}"} %>
+                <%= link_to 'Vote Down', downvote_path(submission), {:id => "submission-#{submission.id}-downvote", :class => "down #{active_class_downvote}"}  %>
+            </div>
+            <div class="vote-information">
+                <span class="upvotes" data-up-votes="<%= submission.total_up_votes %>">
+                    <%= submission.total_up_votes %>
+                </span>
+                <span class="vote-text">
+                    <%= pluralize(submission.total_up_votes, 'Vote').gsub!(/^[0-9]+\W/, '') %>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="span7 submission-information">
+		  <h4><%= link_to submission.title, submission.url, {:target => '_blank'} %></h4>
+		  <p><%= submission.description %></p>
+        </div>
+	</div>

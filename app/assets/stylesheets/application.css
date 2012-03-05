@@ -28,6 +28,82 @@ body {
    vertical-align: middle;
 }
 
+.submission {
+	padding-bottom: 18px;
+	margin-bottom: 15px;
+	border-bottom: 1px dotted #EFEFEF;
+}
+.submission-information {
+	position: relative;
+	left: -30px;
+}
+.vote-panel {
+	width: 30px;
+	height: 64px;
+	display: block;
+	background: url('vote-panel.png') 0px 0px no-repeat;
+	position: relative;
+	float: left;
+	margin-right: 10px;
+}
+
+.vote-information {
+	float: left;
+	position: relative;
+	top: 23px;
+	text-transform: lowercase;
+	font-style: italic;
+	color: #cccccc;
+}
+
+.vote-information .upvotes {
+	font-size: 24px;
+	font-style: normal;
+	color: #999999;
+	position: relative;
+}
+
+.vote-information .vote-text {
+	position: relative;
+	top: -4px;
+}
+
+.vote-panel .up, .vote-panel .down {
+	width: 15px;
+	height: 19px;
+	position: absolute;
+	display: block;
+	background: url('vote-arrows.png');
+	text-indent: -999em;
+}
+
+.vote-panel .up {
+	left: 8px;
+	top: 9px;
+	background-position: 15px 0px;
+}
+
+.vote-panel .down {
+	left: 8px;
+	bottom: 9px;
+	background-position: 15px -30px;
+}
+
+.vote-panel .up:hover {
+	background-position: 31px 0px;
+}
+
+.vote-panel .down:hover {
+	background-position: 31px -30px;
+}
+
+.vote-panel .up.voted {
+	background-position: 0px 0px;
+}
+
+.vote-panel .up.voted:hover {
+	background-position: -16px 0px;
+}
 .footer {
 	margin-top: 25px;
 	padding: 25px 0 25px;

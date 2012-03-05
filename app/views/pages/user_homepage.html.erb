@@ -10,7 +10,7 @@
         <% if @submissions.empty? %>
           <p>Oh my, there are currently no links worth showing on the homepage. Why not <%= link_to 'submit', new_submission_path %> one.</p>
         <% else %>
-          <%= render :partial => 'submissions/submissions', :collection => @submissions %>
+          <%= render :partial => 'submissions/submission', :collection => @submissions %>
         <% end %>
       </div>
 

@@ -27,6 +27,11 @@ RocketFuel::Application.routes.draw do
   # User submissions
   match 'my-submissions' => 'submissions#user_submissions', :as => 'user_submissions'
 
+  # Voting Paths
+  match 'submission/:id/upvote' => 'submissions#upvote', :as => 'upvote'
+  match 'submission/:id/downvote' => 'submissions#downvote', :as => 'downvote'
+
+
   namespace :admin do
     resources :users do
       member do
