@@ -1,5 +1,7 @@
 class SubmissionsController < ApplicationController
 
+  before_filter :require_logged_in_user, :except => :index
+
   def index
   end
 
