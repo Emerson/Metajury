@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303201156) do
+ActiveRecord::Schema.define(:version => 20120306180836) do
 
   create_table "feeds", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120303201156) do
     t.string   "user_level"
     t.string   "password"
     t.string   "reset_token"
+    t.string   "username"
   end
 
   create_table "votes", :force => true do |t|
