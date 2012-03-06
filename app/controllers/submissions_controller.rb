@@ -52,7 +52,7 @@ class SubmissionsController < ApplicationController
     session[:return_to] ||= request.referer
     @submission = Submission.find(params[:id])
     if @current_user.vote(:down, @submission)
-      flash[:notice] = "You have upvoted a story"
+      flash[:notice] = "You have downvoted a story"
     else
       if @current_user.voted?(:down, @submission)
         flash[:alert] = "You can only downvote a submission once"
