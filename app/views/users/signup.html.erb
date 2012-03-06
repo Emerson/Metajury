@@ -23,30 +23,14 @@
           <div class="controls">
             <%= f.text_field :username, {:class => 'input-xlarge', :value => @user.username} %>
             <%= error_message_for(f.object, :username) %>
-        </div><!-- .controls -->
-    </div><!-- .control-group -->
+          </div><!-- .controls -->
+        </div><!-- .control-group -->
  
         <div class="control-group <%= error_class_for(f.object, :password) %>">
           <%= f.label :password, 'Password', :class => 'control-label' %>
           <div class="controls">
             <%= f.password_field :password, {:class => 'input-xlarge'} %>
             <%= error_message_for(f.object, :password) %>
-          </div><!-- .controls -->
-        </div><!-- .control-group -->
-
-        <div class="control-group <%= error_class_for(f.object, :first_name) %>">
-          <%= f.label :first_name, 'First Name', :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :first_name, {:class => 'input-xlarge', :value => @user.first_name} %>
-            <%= error_message_for(f.object, :first_name) %>
-          </div><!-- .controls -->
-        </div><!-- .control-group -->
-
-        <div class="control-group <%= error_class_for(f.object, :last_name) %>">
-          <%= f.label :last_name, 'Last Name', :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :last_name, {:class => 'input-xlarge', :value => @user.last_name} %>
-            <%= error_message_for(f.object, :last_name) %>
           </div><!-- .controls -->
         </div><!-- .control-group -->
 

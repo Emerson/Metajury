@@ -66,8 +66,7 @@ Given /^I register with the email "([^"]*)" and the password "([^"]*)"$/ do |ema
   visit signup_path
   fill_in 'user_email', :with => user.email
   fill_in 'user_password', :with => password
-  fill_in 'user_first_name', :with => user.first_name
-  fill_in 'user_last_name', :with => user.last_name
+  fill_in 'user_username', :with => user.username
   click_button('signup')
   assert User.find_by_email(email)
 end
@@ -138,7 +137,7 @@ Then /^my account changes should be reflected$/ do
 end
 
 Given /^I try to update another persons account$/ do
-  another_user = Factory.create(:valid_user, :email => 'another@user.comrake')
+  another_user = Factory.create(:valid_user, :email => 'another@user.comrake', :username => 'anotheruser')
   visit edit_user_path(another_user)
 end
 

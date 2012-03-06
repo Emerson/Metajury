@@ -36,9 +36,10 @@ Given /^I am on the new user page$/ do
 end
 
 Then /^I should be able to add new users$/ do
-  user = Factory.build(:user, :email => 'added-by-admin@test.com')
+  user = Factory.build(:user, :email => 'added-by-admin@test.com', :username => 'addedbyadmin')
   fill_in 'user_email', :with => user.email
   fill_in 'user_password', :with => 'password'
+  fill_in 'user_username', :with => user.username
   fill_in 'user_first_name', :with => user.first_name
   fill_in 'user_last_name', :with => user.last_name
   click_button('Add User')
@@ -72,7 +73,7 @@ end
 
 Given /^there are some users$/ do
   (1..10).each do |i|
-    Factory.create(:valid_user, :email => "clone+#{i}@rocketfuel.com")
+    Factory.create(:valid_user, :email => "clone+#{i}@rocketfuel.com", :username => "clone#{i}")
   end
   assert(User.all.count > 9)
 end

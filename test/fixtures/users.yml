@@ -10,6 +10,7 @@ one:
   login_count: 100
   last_login_time: 2010-01-25 22:07:31
   token:
+  username: memerson
   confirmed: true
   user_level: 'super-admin'
 
@@ -22,6 +23,7 @@ two:
   last_login_ip: 75.30.250.92
   login_count: 0
   last_login_time:
+  username: johnnysmith
   token: supersecrettoken
   confirmed: false
 
@@ -35,6 +37,7 @@ three:
   last_login_ip: 75.30.250.92
   login_count: 200
   last_login_time:
+  username: minstermister
   token:
   confirmed: true
   user_level: admin

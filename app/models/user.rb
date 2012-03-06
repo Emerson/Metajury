@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   require 'digest/sha1'
 
   # Validations
-  validates_presence_of :email, :password, :first_name, :last_name, :username
+  validates_presence_of :email, :password, :username
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
   validates_uniqueness_of :email, :username
 
@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 
   # Virtual Attributes
   attr_accessor :send_password
+
+  # Protect against mass assignment
+  attr_accessible :username, :password, :first_name, :last_name, :email
 
 
   # Relationships
@@ -55,10 +58,13 @@ class User < ActiveRecord::Base
       false
     else
       if user.login_count.is_a? Integer
-        user.update_attributes(:login_count => (user.login_count + 1), :reset_token => nil)
+        user.login_count = (user.login_count + 1)
+        user.reset_token = nil
       else
-        user.update_attributes(:login_count => 0, :reset_token => nil)
+        user.login_count = 0
+        user.reset_token = nil
       end
+      user.save
       user
     end
   end
@@ -147,7 +153,9 @@ class User < ActiveRecord::Base
   # ========
   # Marks as user as confirmed and clears their token
   def confirm!
-    self.update_attributes(:confirmed => true, :token => false)
+    self.confirmed = true
+    self.token = false
+    self.save
   end
 
 
@@ -155,7 +163,8 @@ class User < ActiveRecord::Base
   # ======================
   # Generates a reset_token that can be used for password resets.
   def request_password_reset
-    self.update_attributes(:reset_token => random_token)
+    self.reset_token = random_token
+    self.save!
   end
 
 
@@ -164,7 +173,9 @@ class User < ActiveRecord::Base
   # Marks a user as confirmed, generates a new token.
   # TODO - send a new confirmation email
   def reconfirm!
-    self.update_attributes(:confirmed => false, :token => random_token)
+    self.confirmed = false
+    self.token = random_token
+    self.save!
   end
 
 
@@ -176,7 +187,7 @@ class User < ActiveRecord::Base
   # Sets the initial login_count to 0
   def set_login_count
     self.login_count = 0
-    self.save
+    self.save!
   end
 
 
@@ -184,7 +195,8 @@ class User < ActiveRecord::Base
   # ==============
   # Generates a new token
   def generate_token
-    write_attribute(:token, random_token)
+    self.token = random_token
+    self.save!
   end
 
 

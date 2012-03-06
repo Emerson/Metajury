@@ -37,7 +37,7 @@ class SubmissionTest < ActiveSupport::TestCase
     submission = Factory.create(:valid_submission, :id => 7401482)
     counter = 0
     (10..40).each do |i|
-      user = Factory.create(:valid_user, :email => "totalvoter-#{i}@metajury.com")
+      user = Factory.create(:valid_user, :email => "totalvoter-#{i}@metajury.com", :username => "totalvoter#{i}")
       counter = counter + 1
       user.vote(:up, submission)
     end
@@ -49,7 +49,7 @@ class SubmissionTest < ActiveSupport::TestCase
     submission = Factory.create(:valid_submission)
     counter = 0
     (10..40).each do |i|
-      user = Factory.create(:valid_user, :email => "upvoter-#{i}@metajury.com")
+      user = Factory.create(:valid_user, :email => "upvoter-#{i}@metajury.com", :username => "upvoter#{i}")
       counter = counter + 1
       user.vote(:up, submission)
     end
@@ -61,7 +61,7 @@ class SubmissionTest < ActiveSupport::TestCase
     submission = Factory.create(:valid_submission)
     counter = 0
     (10..40).each do |i|
-      user = Factory.create(:valid_user, :email => "downvoter-#{i}@metajury.com")
+      user = Factory.create(:valid_user, :email => "downvoter-#{i}@metajury.com", :username => "downvoter#{i}")
       counter = counter + 1
       user.vote(:down, submission)
     end

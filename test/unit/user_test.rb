@@ -53,7 +53,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "new users have a random token" do
-    user = User.new({:email => 'emerson@plankdesign.com', :password => 'password', :first_name => 'Emerson', :last_name => 'Lackey'})
+    user = User.new({:email => 'emerson@plankdesign.com', :password => 'password', :first_name => 'Emerson', :last_name => 'Lackey', :username => 'RandomTokenUser'})
     if user.save
       assert(user.token, "Token is not set")
     else
@@ -62,8 +62,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "new user has minimum requirements (email and password)" do
-    user = User.new({:email => 'emerson_valid@gmail.com', :first_name => 'Emerson_valid', :last_name => 'Lackey_valid', :password => 'password'})
-    assert(user.valid?)
+    user = User.new({:email => 'emerson_valid@gmail.com', :first_name => 'Emerson_valid', :last_name => 'Lackey_valid', :password => 'password', :username => 'MinUser'})
+    assert(user.valid?, "Errors: #{user.errors.inspect}")
   end
 
   test "confirmed user are allowed to login" do
@@ -78,7 +78,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'non-admin users cannot change other users accounts' do
-    user = Factory.create(:valid_user, :email => 'naughty-user@bad.com')
+    user = Factory.create(:valid_user, :email => 'naughty-user@bad.com', :username => 'baduserchange')
     another_user = Factory.create(:valid_user)
     assert_equal(false, user.can_update?(another_user))
   end

@@ -5,7 +5,11 @@ FactoryGirl.define do
   end
 
   sequence :unique_title do |n|
-    "Awesome Store - #{n}"
+    "Awqesome Store - #{n}"
+  end
+
+  sequence :number do |n|
+    "#{n}"
   end
 
 end
@@ -15,6 +19,7 @@ FactoryGirl.define do
   factory :user do
     first_name 'John'
     last_name 'Smith'
+    username "user#{FactoryGirl.generate(:number)}"
     email "clone#{FactoryGirl.generate(:unique_name)}@factory.com"
     password  'password'
   end
@@ -24,6 +29,7 @@ FactoryGirl.define do
     password 'password'
     confirmed true
     token false
+    username "Adminify#{FactoryGirl.generate(:number)}"
     first_name 'Mr. Admin'
     last_name 'Adminis'
     user_level 'admin'
@@ -35,6 +41,7 @@ FactoryGirl.define do
     password 'password'
     confirmed true
     token false
+    username "SuperAdminify#{FactoryGirl.generate(:number)}"
     first_name 'Mr. Admin'
     last_name 'Superious'
     user_level 'super-admin'
@@ -46,6 +53,7 @@ FactoryGirl.define do
     password 'password'
     first_name 'Mr. Valid'
     last_name 'Validiously'
+    username "Validious#{FactoryGirl.generate(:number)}"
     user_level 'user'
     login_count 0
     token false
@@ -58,6 +66,7 @@ FactoryGirl.define do
     first_name 'Mr. Unconfirmed'
     last_name "Unconfirmious"
     user_level 'user'
+    username "unconfirmed#{FactoryGirl.generate(:number)}"
     login_count 0
     confirmed false
     token 'fh135aaa'
