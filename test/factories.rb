@@ -74,7 +74,7 @@ FactoryGirl.define do
     user_id 1
     title FactoryGirl.generate(:unique_name)
     url 'http://www.emersonlackey.com'
-    vote_tally 28
+    vote_tally 0
     description "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum, leo eget varius rhoncus, neque magna tempor ligula, ut posuere nibh felis sit amet metus. Nulla elementum cursus justo ac ullamcorper. Curabitur non enim eget sem pretium placerat. Cras viverra tempus erat, eget ornare augue tincidunt eu. Pellentesque eget arcu nisl, iaculis facilisis erat. Suspendisse ullamcorper urna sed turpis bibendum placerat. Aenean dapibus tincidunt orci quis viverra. Aenean faucibus enim vel metus laoreet ultrices."
   end
 
