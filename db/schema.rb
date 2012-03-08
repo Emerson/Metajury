@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120307152558) do
+ActiveRecord::Schema.define(:version => 20120308031745) do
 
   create_table "feeds", :force => true do |t|
     t.integer  "user_id"
@@ -32,7 +32,10 @@ ActiveRecord::Schema.define(:version => 20120307152558) do
     t.integer  "vote_tally"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.float    "score"
   end
+
+  add_index "submissions", ["score"], :name => "index_submissions_on_score"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

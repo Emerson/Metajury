@@ -1,5 +1,7 @@
 class Submission < ActiveRecord::Base
 
+  include Ranker
+
   # Validations
   validates_presence_of :title, :description, :url, :user_id
 
@@ -43,5 +45,6 @@ class Submission < ActiveRecord::Base
     uri = URI(url)
     uri.scheme + "://" + uri.host
   end
+
 
 end
