@@ -35,8 +35,8 @@ class User < ActiveRecord::Base
       current_vote.destroy
     end
     vote = self.votes.build(:vote_type => type.to_s, :item_id => submission.id)
-    submission.update_rank
     vote.save
+    submission.update_rank
   end
 
 
