@@ -10,7 +10,7 @@ class Submission < ActiveRecord::Base
   has_many :votes, :foreign_key => :item_id, :dependent => :destroy
 
   # Callbacks
-  after_create :update_rank, :add_initial_upvate
+  after_create :add_initial_upvate
 
   # total_votes
   # ===========
@@ -64,6 +64,7 @@ class Submission < ActiveRecord::Base
   # Adds an initial upvote to a submission by it's creator
   def add_initial_upvate
     Vote.create(:item_id => self.id, :user_id => self.user_id, :vote_type => 'up')
+    self.update_rank
   end
 
   # Class Methods
