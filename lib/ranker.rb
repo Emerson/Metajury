@@ -3,7 +3,7 @@ module Ranker
   # score
   # =====
   # Calculates the score of a submission
-  def score
+  def calculate_score
     score = total_up_votes - total_down_votes
     order = Math.log([score.abs, 1].max, 10)
     if score > 0

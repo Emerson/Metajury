@@ -35,7 +35,7 @@ class SubmissionTest < ActiveSupport::TestCase
   test "self.total_votes should return fresh vote count" do
     # Add thirty up votes to a submission
     submission = Factory.create(:valid_submission, :id => 7401482)
-    counter = 0
+    counter = 1 #count the initial upvote
     (10..40).each do |i|
       user = Factory.create(:valid_user, :email => "totalvoter-#{i}@metajury.com", :username => "totalvoter#{i}")
       counter = counter + 1
@@ -47,13 +47,14 @@ class SubmissionTest < ActiveSupport::TestCase
   test "self.up_votes should return a fresh 'up' vote count" do
     # Add thirty up votes to a submission
     submission = Factory.create(:valid_submission)
-    counter = 0
+    initial_submission = submission.votes
+    counter = 1 #count the initial upvote
     (10..40).each do |i|
       user = Factory.create(:valid_user, :email => "upvoter-#{i}@metajury.com", :username => "upvoter#{i}")
       counter = counter + 1
       user.vote(:up, submission)
     end
-    assert(submission.total_up_votes === counter, "Votes: #{submission.total_votes.inspect}, should be #{counter}")
+    assert(submission.total_up_votes === counter, "Initial: #{initial_submission.inspect}    Votes: #{submission.total_votes.inspect}, should be #{counter}")
   end
 
   test "self.down_votes should return a fresh 'down' vote count" do
@@ -85,6 +86,12 @@ class SubmissionTest < ActiveSupport::TestCase
   test "user.friendly_url should return a url without the path" do
     submission = Factory.create(:valid_submission, :url => 'http://www.example.com/example?i=13531')
     assert(submission.friendly_url === 'http://www.example.com', "Output was: #{submission.friendly_url}")
+  end
+
+  test "submissions should be upvoted by default during creation" do
+    user = Factory.create(:valid_user, :email => 'initial_upvote@metajury.com', :username => 'initial_upvote')
+    submission = Factory.create(:valid_submission, :user_id => user.id)
+    assert(submission.total_up_votes == 1, "Total count is: #{submission.total_up_votes}, but should be 1")
   end
 
 end

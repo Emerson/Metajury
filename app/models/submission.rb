@@ -9,6 +9,9 @@ class Submission < ActiveRecord::Base
   belongs_to :user
   has_many :votes, :foreign_key => :item_id, :dependent => :destroy
 
+  # Callbacks
+  after_create :update_rank, :add_initial_upvate
+
   # total_votes
   # ===========
   # Returns a fresh tally of total votes
@@ -21,6 +24,7 @@ class Submission < ActiveRecord::Base
   # ==============
   # Returns a count of up votes
   def total_up_votes
+    self.reload
     self.votes.are(:up).count
   end
 
@@ -28,6 +32,7 @@ class Submission < ActiveRecord::Base
   # ================
   # Returns a count of down votes
   def total_down_votes
+    self.reload
     self.votes.are(:down).count
   end
 
@@ -46,5 +51,31 @@ class Submission < ActiveRecord::Base
     uri.scheme + "://" + uri.host
   end
 
+  # update_rank
+  # ===========
+  # Updates the rank of a submission
+  def update_rank
+    self.score = calculate_score
+    self.save
+  end
+
+  # add_initial_upvate
+  # ==================
+  # Adds an initial upvote to a submission by it's creator
+  def add_initial_upvate
+    Vote.create(:item_id => self.id, :user_id => self.user_id, :vote_type => 'up')
+  end
+
+  # Class Methods
+
+
+  # recalculate_ranks
+  # =================
+  # Loops through all records and recalculates their ranks
+  def self.recalculate_ranks
+    self.all.each do |submission|
+      submission.update_rank
+    end
+  end
 
 end
