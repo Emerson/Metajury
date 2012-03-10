@@ -22,6 +22,7 @@ RocketFuel::Application.routes.draw do
 
   # Submission Routes
   resources :submissions do
+    resources :comments
   end
 
   # User submissions

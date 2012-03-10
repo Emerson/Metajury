@@ -87,6 +87,11 @@ FactoryGirl.define do
     description "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum, leo eget varius rhoncus, neque magna tempor ligula, ut posuere nibh felis sit amet metus. Nulla elementum cursus justo ac ullamcorper. Curabitur non enim eget sem pretium placerat. Cras viverra tempus erat, eget ornare augue tincidunt eu. Pellentesque eget arcu nisl, iaculis facilisis erat. Suspendisse ullamcorper urna sed turpis bibendum placerat. Aenean dapibus tincidunt orci quis viverra. Aenean faucibus enim vel metus laoreet ultrices."
   end
 
+  factory :valid_comment, :class => Comment do
+    content "This is an example comment"
+    vote_tally 0
+  end
+
   # This will use the User class (Admin would have been guessed)
   # factory :admin, :class => User do
   #   first_name 'Admin'

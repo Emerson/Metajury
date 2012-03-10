@@ -1,0 +1,17 @@
+<%= form_for [submission, comment] do |f| %>
+
+	<fieldset>
+
+		<div class="control-group <%= error_class_for(f.object, :url) %>">
+			<%= f.label :content, "Leave a Comment", :class => 'control-label' %>
+			<div class="controls">
+			<%= f.text_area :content, {:class => 'input-xlarge'} %>
+			<%= error_message_for(f.object, :content) %>
+			</div><!-- .controls -->
+		</div>
+
+	</fieldset>
+
+	<%= f.submit 'Add Comment', {:class => 'btn btn-primary', :id => 'add_comment'} %>
+
+<% end %>

@@ -1,3 +1,7 @@
+Given /^I am a site visitor$/ do
+  assert(true) # That's all we need
+end
+
 Given /^I have a valid and confirmed user$/ do
   @valid_confirmed = Factory.create(:user, :confirmed => true, :token => nil)
   assert (@valid_confirmed.valid? && @valid_confirmed.confirmed?)

@@ -17,14 +17,12 @@ Scenario: Logged out Homepage
   Given I am logged out and visit the homepage
   Then the root_path of metajury should be our homepage
 
-
 Scenario: Up vote a submission
   Given I am a logged in user with the email "logged-in-upvoter@metajury.com" and the password "password"
   And there is a valid submission
   And I am on the homepage
   And I upvote a valid submission
   Then the submission should receive a vote
-
 
 Scenario: Down vote a submission
   Given I am a logged in user with the email "logged-in-downvoter@metajury.com" and the password "password"
@@ -40,7 +38,6 @@ Scenario: Users cannot double upvote
   And I upvote a valid submission twice
   Then I should see an error message about already voting
 
-@submission
 Scenario: Users can remove an upvote
   Given I am a logged in user with the email "flipflopper@metajury.com" and the password "password"
   And there is a valid submission

@@ -36,6 +36,11 @@ end
             <%= submission.user.first_name %> 
         <% end %>
     </small></p>
-	  <p><%= submission.description %></p>
+    <% unless submission.description.empty? %>
+	   <p><%= submission.description %></p>
+    <% end %>
+    <p class="submission-options">
+        <%= link_to pluralize(submission.comments.count, "comment"), submission_comment_path(submission.id), {:class => 'comments_link', 'data-number-of-comments' => submission.comments.count} %>
+    </p>
     </div>
 </div>

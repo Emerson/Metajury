@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   # Relationships
   has_many :votes
   has_many :submissions
+  has_many :comments
   accepts_nested_attributes_for :votes
 
 

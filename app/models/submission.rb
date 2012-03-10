@@ -8,6 +8,7 @@ class Submission < ActiveRecord::Base
   # Associations
   belongs_to :user
   has_many :votes, :foreign_key => :item_id, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
 
   # Callbacks
   after_create :add_initial_upvate

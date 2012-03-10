@@ -113,6 +113,34 @@ body {
 	background-position: -16px 0px;
 }
 
+#comment_content {
+	height: 70px;
+	width: 100%;
+}
+
+.comment {
+	padding: 15px;
+	margin: 0 0 15px 0;
+	border: 1px solid #efefef;
+}
+
+.comment .comment-meta {
+	color: #ccc;
+	font-style: italic;
+}
+
+.comment .comment-meta .username {
+	font-weight: bold;
+	font-style: normal;
+	color: #999;
+}
+
+.submission-head {
+	border-bottom: 1px solid #efefef;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+}
+
 .footer {
 	margin-top: 25px;
 	padding: 25px 0 25px;

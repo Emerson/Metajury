@@ -1,0 +1,49 @@
+<%
+if @current_user
+    active_class_upvote = @current_user.voted?(:up, @submission) ? 'voted' : ''
+    active_class_downvote = @current_user.voted?(:down, @submission) ? 'voted' : ''
+else
+    active_class_upvote = ''
+    active_class_downvote = ''
+end
+%>
+
+<div class="row submission-head">
+	<div class="votes span2">
+        <div class="vote-panel">
+            <%= link_to 'Vote Up', upvote_path(@submission), {:id => "submission-#{@submission.id}-upvote", :class => "up #{active_class_upvote}"} %>
+            <%= link_to 'Vote Down', downvote_path(@submission), {:id => "submission-#{@submission.id}-downvote", :class => "down #{active_class_downvote}"}  %>
+        </div>
+        <div class="vote-information">
+            <span class="upvotes" data-up-votes="<%= @submission.total_up_votes %>">
+                <%= @submission.total_up_votes %>
+            </span>
+            <span class="vote-text">
+                <%= pluralize(@submission.total_up_votes, 'Vote').gsub!(/^[0-9]+\W/, '') %>
+    	    </span>
+    	</div>
+    </div><!-- .span2 -->
+    <div class="span10 submission_title">
+    	<h2><%= link_to @submission.title, @submission.url, {:target => '_blank'} %></h2>
+    	<p><small><%= link_to @submission.friendly_url, @submission.friendly_url, :class => 'small-link' %> – submitted <%= time_ago_in_words(@submission.created_at) %> ago by 
+        <% if @submission.user.blank? # TODO: Fix this as it was causing issues with testing %>
+        unknown 
+        <% else %>
+            <%= @submission.user.first_name %> 
+        <% end %>
+    </small></p>
+    </div><!-- .span10 -->
+</div><!-- .row -->
+
+<!-- comments -->
+<div class="row">
+	<div class="span9">
+		<%= render :partial => 'comments/form', :locals => {:comment => @comment, :submission => @submission} if @current_user %>
+		<% @submission.comments.each do |comment| %>
+			<div class="comment">
+				<p class="comment-meta"><span class="username"><%= comment.user.username %></span> about <%= time_ago_in_words comment.created_at %> ago</p>
+				<%= comment.content %>
+			</div><!-- .comment -->
+		<% end %>
+	</div>
+</div>
