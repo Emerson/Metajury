@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <th class='email'>Email</th>
+      <th class='username'>Username</th>
       <th class='first_name'>First Name</th>
       <th class='last_name'>Last Name</th>
       <th></th>
@@ -24,6 +25,7 @@
           <%= content_tag(:span, 'Admin', {:class => 'label label-success'}) if user.admin? %>
           <%= content_tag(:span, 'Unconfirmed', {:class => 'label label-warning'}) unless user.confirmed? %>
         </td>
+        <td><%= user.username %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td>
