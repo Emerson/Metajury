@@ -1,0 +1,48 @@
+<div class="page-header">
+    <h1>Edit Submission</h1>
+</div><!-- .page-header -->
+
+<div class="row">
+
+  <div class="span12">
+
+    <%= form_for @submission, {:url => admin_submission_path(@submission), :html => {:class => 'form-horizontal'}} do |f| %>
+
+      <fieldset>
+
+        <div class="control-group <%= error_class_for(f.object, :url) %>">
+          <%= f.label :url, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :url, {:class => 'input-xlarge', :value => @submission.url} %>
+            <%= error_message_for(f.object, :url) %>
+          </div>
+        </div>
+
+        <div class="control-group <%= error_class_for(f.object, :title) %>">
+          <%= f.label :title, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :title, {:class => 'input-xlarge', :value => @submission.title} %>
+            <%= error_message_for(f.object, :title) %>
+          </div>
+        </div>
+
+        <div class="control-group <%= error_class_for(f.object, :description) %>">
+          <%= f.label :description, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_area :description, {:class => 'input-xlarge', :rows => 6} %> 
+            <%= error_message_for(f.object, :description) %>    
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= button_tag "Update Submission", {:id => 'admin_update_submission', :class => 'btn btn-primary'} %>
+          <%= link_to "Cancel", admin_submissions_path, {:class => 'btn'} %>
+        </div>
+
+      </fieldset>
+
+    <% end %>
+
+  </div><!-- .span12 -->
+
+</div><!-- .row -->

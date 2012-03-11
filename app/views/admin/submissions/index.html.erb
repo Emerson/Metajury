@@ -1,0 +1,37 @@
+<div class="page-header">
+    <h1>Submissions</h1>
+</div><!-- .page-header -->
+
+<table class="table table-striped admin_users">
+  <thead>
+    <tr>
+      <th>Score</th>
+      <th>Up/Down Votes</th>
+      <th>Comments</th>
+      <th>Title</th>
+      <th>Posted By</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <tr class="submission" data-submission-id="<%= submission.id %>">
+        <td><%= submission.score %></td>
+        <td><%= submission.total_up_votes %> / <%= submission.total_down_votes %></td>
+        <td><%= submission.comments.count %></td>
+        <td><%= link_to submission.title, submission_comments_path(submission), :target => '_blank' %></td>
+        <td><%= submission.user.username %></td>
+        <td>
+          <span class="pull-right">
+          <%= link_to 'Edit', edit_admin_submission_path(submission), {:class => 'btn small btn-primary edit_admin_submission_link', :id => "submission_#{submission.id}"} %>
+          <%= link_to 'Delete', confirm_delete_admin_submission_path(submission), {:class => 'btn small delete_admin_submission', :id => "delete_submission_#{submission.id}"} %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <%= will_paginate @submissions %>
+</div><!-- .pagination -->

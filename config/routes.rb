@@ -39,6 +39,11 @@ RocketFuel::Application.routes.draw do
         get 'confirm_delete'
       end
     end
+    resources :submissions do
+      member do
+        get 'confirm_delete'
+      end
+    end
     root :to => 'dashboard#index'
   end
 
