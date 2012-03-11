@@ -2,10 +2,10 @@ class PagesController < ApplicationController
 
  def home
   if @current_user
-    @submissions = Submission.order('score desc').limit(50).all
+    @submissions = Submission.paginate(:page => params[:page]).order('score DESC, created_at DESC').all
     render 'user_homepage'    
   else
-    @submissions = Submission.order('score desc').limit(50).all
+    @submissions = Submission.paginate(:page => params[:page]).order('score DESC, created_at DESC').all
     render 'homepage'
   end
  end

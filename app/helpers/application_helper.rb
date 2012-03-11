@@ -141,7 +141,7 @@ module ApplicationHelper
     admin_items.each do |item|
       feed_data = ActiveSupport::JSON.decode(item.data)
       logger.info("FEED TYPE "+item.feed_type)
-      feed_message = sprintf(feed_text_for(item.feed_type), feed_data['first_name']) + " - " + content_tag(:span, time_ago_in_words(item.created_at))
+      feed_message = sprintf(feed_text_for(item.feed_type), feed_data['username']) + " - " + content_tag(:span, time_ago_in_words(item.created_at))
       html << content_tag(:p, feed_message.html_safe)
     end
     html.join("\n").html_safe

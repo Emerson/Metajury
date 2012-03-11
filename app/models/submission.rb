@@ -13,6 +13,8 @@ class Submission < ActiveRecord::Base
   # Callbacks
   after_create :add_initial_upvate
 
+  self.per_page = 50
+
   # total_votes
   # ===========
   # Returns a fresh tally of total votes

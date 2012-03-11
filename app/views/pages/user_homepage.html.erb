@@ -12,6 +12,9 @@
         <% else %>
           <%= render :partial => 'submissions/submission', :collection => @submissions %>
         <% end %>
+
+        <%= will_paginate @submissions %>
+
       </div>
 
       <div class="span3">

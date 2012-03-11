@@ -44,3 +44,10 @@ Scenario: Users can remove an upvote
   And I am on the homepage
   And I upvote and then downvote a submission
   Then my vote should be removed from the submission
+
+Scenario: Paginated Submissions
+  Given I am a site visitor
+  And there are "100" submissions
+  And I am on the homepage
+  And I click on page "2"
+  Then I should see more submissions

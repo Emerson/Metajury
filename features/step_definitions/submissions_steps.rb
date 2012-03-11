@@ -79,3 +79,16 @@ Then /^my vote should be removed from the submission$/ do
   vote_count = Vote.where(:user_id => @current_user.id, :item_id => @flopper_id, :vote_type => 'up').count
   assert(vote_count == 0, "The vote count was #{vote_count} instead of 0")
 end
+
+Given /^there are "([^"]*)" submissions$/ do |count|
+  (1..count.to_i).each { Factory.create(:valid_submission, :title => "Paginate-#{count}") }
+  assert(Submission.all.count == count.to_i, "Expected #{count} submissions, had #{Submission.all.count} instead")
+end
+
+Given /^I click on page "([^"]*)"$/ do |number|
+  link = page.find('.pagination li.next_page a').click
+end
+
+Then /^I should see more submissions$/ do
+  assert(page.has_selector?('.submission'))
+end
