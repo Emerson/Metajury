@@ -99,7 +99,9 @@ module ApplicationHelper
 
   # Outputs the admin navigation.
   def admin_nav
-    items = {'Home' => admin_root_path, 'Users' => admin_users_path}
+    items = {'Home' => admin_root_path, 
+             'Users' => admin_users_path,
+             'Submissions' => admin_submissions_path}
     output_nav(items)
   end
 
