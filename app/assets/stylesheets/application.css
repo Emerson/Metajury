@@ -135,6 +135,10 @@ body {
 	color: #999;
 }
 
+.devnews {
+	margin-top: 40px;
+}
+
 .submission-head {
 	border-bottom: 1px solid #efefef;
 	padding-bottom: 30px;
