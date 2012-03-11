@@ -5,6 +5,7 @@
 <table class="table table-striped admin_users">
   <thead>
     <tr>
+      <th>Date</th>
       <th>Score</th>
       <th>Up/Down Votes</th>
       <th>Comments</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr class="submission" data-submission-id="<%= submission.id %>">
+        <td><%= submission.created_at.strftime("%d/%m/%Y at %I:%M%p") %></td>
         <td><%= submission.score %></td>
         <td><%= submission.total_up_votes %> / <%= submission.total_down_votes %></td>
         <td><%= submission.comments.count %></td>

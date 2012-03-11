@@ -193,10 +193,6 @@ class User < ActiveRecord::Base
     self.save!
   end
 
-
-  # generate_token
-  # ==============
-  # Generates a new token
   def generate_token
     self.token = random_token
     self.save!

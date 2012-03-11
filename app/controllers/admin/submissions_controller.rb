@@ -3,7 +3,7 @@ class Admin::SubmissionsController < ApplicationController
   layout 'admin'
 
   def index
-    @submissions = Submission.paginate(:page => params[:page]).all
+    @submissions = Submission.paginate(:page => params[:page]).order('created_at DESC').all
   end
 
   def edit
