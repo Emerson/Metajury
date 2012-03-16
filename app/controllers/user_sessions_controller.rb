@@ -23,6 +23,7 @@ class UserSessionsController < ApplicationController
       @user = User.login(params[:email], params[:password])
       logger.info params.inspect
       if @user
+        cookies.permanent[:auth_token] = @user.auth_token
         session[:user_id] = @user.id
         flash[:success] = 'You have been logged in'
         Feed.login_user(@user)
@@ -45,6 +46,7 @@ class UserSessionsController < ApplicationController
     Feed.logout_user(@current_user) if @current_user
     session[:user_id] = nil
     session[:success] = 'You have been logged out'
+    cookies.delete :auth_token
     redirect_to root_path
   end
 
