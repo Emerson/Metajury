@@ -3,7 +3,7 @@ require 'test_helper'
 class RankerTest < ActiveSupport::TestCase
 
   test "Submission.recalculate_ranks should recalculate rankings" do
-    submission = Factory.create(:valid_submission)
+    submission = FactoryGirl.create(:valid_submission)
     previous_score = submission.score
     # Add 100 votes
     (0..100).each_with_index do |vote, index|
@@ -15,7 +15,7 @@ class RankerTest < ActiveSupport::TestCase
   end
 
   test "A submission should have a score when created" do
-    submission = Factory.create(:valid_submission)
+    submission = FactoryGirl.create(:valid_submission)
     assert(!submission.score != nil)
   end
 

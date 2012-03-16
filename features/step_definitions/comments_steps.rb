@@ -1,7 +1,7 @@
 Given /^I add a comment$/ do
   link = page.find('.comments_link:first')
   link.click
-  comment = Factory.create(:valid_comment)
+  comment = FactoryGirl.create(:valid_comment)
   fill_in 'comment_content', :with => comment.content
   click_button 'add_comment'
 end
@@ -11,10 +11,10 @@ Then /^the submission should have a comment$/ do
 end
 
 Given /^there is a valid submission with "([^"]*)" comments$/ do |number_of_comments|
-  submission = Factory.create(:valid_submission)
-  user = Factory.create(:valid_user)
+  submission = FactoryGirl.create(:valid_submission)
+  user = FactoryGirl.create(:valid_user)
   (1..number_of_comments.to_i).each do |i|
-    comment = Factory.create(:valid_comment, :submission_id => submission.id, :user_id => user.id)
+    comment = FactoryGirl.create(:valid_comment, :submission_id => submission.id, :user_id => user.id)
   end
   submission.reload
   assert(submission.comments.count == 5, "There are only #{submission.comments.count} comments")

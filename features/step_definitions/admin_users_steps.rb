@@ -1,5 +1,5 @@
 Given /^I have a valid and confirmed admin user$/ do
-  @user = Factory.create(:admin)
+  @user = FactoryGirl.create(:admin)
 end
 
 Given /^I login$/ do
@@ -14,7 +14,7 @@ Then /^I should see the admin layout$/ do
 end
 
 Given /^I am logged in as an admin user$/ do
-  user = Factory.create(:admin)
+  user = FactoryGirl.create(:admin)
   visit root_path
   fill_in 'email', :with => user.email
   fill_in 'password', :with => 'password'
@@ -36,7 +36,7 @@ Given /^I am on the new user page$/ do
 end
 
 Then /^I should be able to add new users$/ do
-  user = Factory.build(:user, :email => 'added-by-admin@test.com', :username => 'addedbyadmin')
+  user = FactoryGirl.build(:user, :email => 'added-by-admin@test.com', :username => 'addedbyadmin')
   fill_in 'user_email', :with => user.email
   fill_in 'user_password', :with => 'password'
   fill_in 'user_username', :with => user.username
@@ -52,7 +52,7 @@ Then /^I should special admin fields$/ do
 end
 
 Given /^I am on the admin users page$/ do
-  @edited_user = Factory.create(:user, :email => 'user_to_edit@editing.com')
+  @edited_user = FactoryGirl.create(:user, :email => 'user_to_edit@editing.com')
   visit admin_users_path
   assert page.has_selector?('table.admin_users')
 end
@@ -73,13 +73,13 @@ end
 
 Given /^there are some users$/ do
   (1..10).each do |i|
-    Factory.create(:valid_user, :email => "clone+#{i}@rocketfuel.com", :username => "clone#{i}")
+    FactoryGirl.create(:valid_user, :email => "clone+#{i}@rocketfuel.com", :username => "clone#{i}")
   end
   assert(User.all.count > 9)
 end
 
 Given /^I delete one$/ do
-  Factory.create(:valid_user, :email => 'deleted@rocketfuel.com')
+  FactoryGirl.create(:valid_user, :email => 'deleted@rocketfuel.com')
   visit admin_users_path
   link = page.find(:css, 'a.delete_admin_user:last')
   @delete_id = link['id'].split("_").last # returns id from delete_user_13

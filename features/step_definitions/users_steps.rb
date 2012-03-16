@@ -3,12 +3,12 @@ Given /^I am a site visitor$/ do
 end
 
 Given /^I have a valid and confirmed user$/ do
-  @valid_confirmed = Factory.create(:user, :confirmed => true, :token => nil)
+  @valid_confirmed = FactoryGirl.create(:user, :confirmed => true, :token => nil)
   assert (@valid_confirmed.valid? && @valid_confirmed.confirmed?)
 end
 
 Given /^I have an unconfirmed user$/ do
-  @unconfirmed = Factory.create(:unconfirmed_user, :email => 'unconfirmed@example.com')
+  @unconfirmed = FactoryGirl.create(:unconfirmed_user, :email => 'unconfirmed@example.com')
   assert !@unconfirmed.confirmed?
 end
 
@@ -27,7 +27,7 @@ Then /^I should see "([^"]*)"$/ do |matcher|
 end
 
 Given /^I login with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
-  user = Factory.create(:admin, :confirmed => true, :email => email, :password => password)
+  user = FactoryGirl.create(:admin, :confirmed => true, :email => email, :password => password)
   fill_in 'email', :with => email
   fill_in 'password', :with => password
   click_button('login');
@@ -38,7 +38,7 @@ Then /^I should be logged in$/ do
 end
 
 Given /^I am logged in$/ do
-  user = Factory.create(:valid_user, :email => 'my-valid-user@example.com', :password => 'password')
+  user = FactoryGirl.create(:valid_user, :email => 'my-valid-user@example.com', :password => 'password')
   visit root_path
   fill_in 'email', :with => user.email
   fill_in 'password', :with => 'password'
@@ -58,7 +58,7 @@ Given /^user signups are active$/ do
 end
 
 Given /^I am a logged in user with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
-  @current_user = Factory.create(:valid_user, :email => email, :password => password)
+  @current_user = FactoryGirl.create(:valid_user, :email => email, :password => password)
   visit root_path
   fill_in 'email', :with => email
   fill_in 'password', :with => password
@@ -66,7 +66,7 @@ Given /^I am a logged in user with the email "([^"]*)" and the password "([^"]*)
 end
 
 Given /^I register with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
-  user = Factory.build(:valid_user, :email => email)
+  user = FactoryGirl.build(:valid_user, :email => email)
   visit signup_path
   fill_in 'user_email', :with => user.email
   fill_in 'user_password', :with => password
@@ -141,7 +141,7 @@ Then /^my account changes should be reflected$/ do
 end
 
 Given /^I try to update another persons account$/ do
-  another_user = Factory.create(:valid_user, :email => 'another@user.comrake', :username => 'anotheruser')
+  another_user = FactoryGirl.create(:valid_user, :email => 'another@user.comrake', :username => 'anotheruser')
   visit edit_user_path(another_user)
 end
 
@@ -150,7 +150,7 @@ Then /^I should see an error$/ do
 end
 
 Given /^I have a user with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|
-  Factory.create(:valid_user, :email => email, :password => password)
+  FactoryGirl.create(:valid_user, :email => email, :password => password)
 end
 
 Given /^I try to login with the email "([^"]*)" and the password "([^"]*)"$/ do |email, password|

@@ -30,8 +30,8 @@ Then /^the root_path of metajury should be our homepage$/ do
 end
 
 Given /^there is a valid submission$/ do
-  user = Factory.create(:valid_user, :username => 'validsubmission')
-  Factory.create(:valid_submission, :user_id => user.id)
+  user = FactoryGirl.create(:valid_user, :username => 'validsubmission')
+  FactoryGirl.create(:valid_submission, :user_id => user.id)
 end
 
 Given /^I upvote a valid submission$/ do
@@ -81,8 +81,8 @@ Then /^my vote should be removed from the submission$/ do
 end
 
 Given /^there are "([^"]*)" submissions$/ do |count|
-  user = Factory.create(:valid_user, :email => 'submitter515355@metajury.com', :username => 'powersubmitter13531531')
-  (1..count.to_i).each { Factory.create(:valid_submission, :title => "Paginate-#{count}", :user_id => user.id) }
+  user = FactoryGirl.create(:valid_user, :email => 'submitter515355@metajury.com', :username => 'powersubmitter13531531')
+  (1..count.to_i).each { FactoryGirl.create(:valid_submission, :title => "Paginate-#{count}", :user_id => user.id) }
   assert(Submission.all.count == count.to_i, "Expected #{count} submissions, had #{Submission.all.count} instead")
 end
 
