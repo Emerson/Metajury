@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120310061214) do
+ActiveRecord::Schema.define(:version => 20120311200504) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120310061214) do
     t.string   "reset_token"
     t.string   "username"
     t.string   "salt"
+    t.string   "auth_token"
   end
 
   create_table "votes", :force => true do |t|

@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
 
   # Callbacks
-  after_create :generate_token, :set_login_count
+  after_create :generate_token, :generate_auth_token, :set_login_count
 
 
   # Virtual Attributes
@@ -198,6 +198,11 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def generate_auth_token
+    self.auth_token = SecureRandom.urlsafe_base64
+    self.save!
+  end
+
 
   # random_token
   # ============
@@ -207,5 +212,8 @@ class User < ActiveRecord::Base
     rand(36**8).to_s(36)
   end
 
+  def self.refresh_auth_tokens
+    all.each {|user| user.generate_auth_token}
+  end
 
 end
