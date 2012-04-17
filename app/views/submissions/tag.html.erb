@@ -1,0 +1,33 @@
+<div id="tag" class="tag content">
+
+    <div class="page-header">
+        <h1>Top Submissions</h1>
+    </div><!-- .page-header -->
+
+    <div class="row">
+
+      <div class="span9">
+        <% if @submissions.empty? %>
+          <p>Oh my, there are currently no links worth showing on the homepage. Why not <%= link_to 'submit', new_submission_path %> one.</p>
+        <% else %>
+          <%= render :partial => 'submissions/submission', :collection => @submissions %>
+        <% end %>
+
+        <% #will_paginate @submissions %>
+
+      </div>
+
+      <div class="span3">
+        <h3>Add a Submission</h3>
+        <p>
+          Found something cool? Why not submit it and share the love.
+        </p>
+        <p><%= link_to 'Add Submission', new_submission_path, :class => 'btn btn-primary' %></p>
+
+        <%= render 'layouts/dev_news' %>
+
+      </div>
+
+    </div><!-- .row -->
+ 
+</div>

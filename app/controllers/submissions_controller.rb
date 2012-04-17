@@ -12,6 +12,10 @@ class SubmissionsController < ApplicationController
   def create
     @submission = @current_user.submissions.build(params[:submission])
     if @submission.save
+      unless params[:tags][:list].blank?
+        tags = Tag.from_list(params[:tags][:list])
+        @submission.tags << tags unless tags.blank?
+      end
       flash[:success] = "Your submission has been added"
       redirect_to root_path
     else
@@ -28,6 +32,11 @@ class SubmissionsController < ApplicationController
   end
 
   def view
+  end
+
+  def tag
+    @tag = Tag.find_by_slug(params[:tag])
+    @submissions = @tag.submissions
   end
 
   def destroy

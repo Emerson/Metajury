@@ -40,7 +40,16 @@ end
 	   <p><%= submission.description %></p>
     <% end %>
     <p class="submission-options">
+        
         <%= link_to pluralize(submission.comments.count, "comment"), submission_comment_path(submission.id), {:class => 'comments_link', 'data-number-of-comments' => submission.comments.count} %>
+        <% if submission.tags.count > 0 %>
+        <span><i class="icon-tag"></i> Tags: </span>
+        <% submission.tags.each do |tag| %>
+            <a href="#"><%= tag.name %></a>&nbsp; 
+        <% end %>
+        <% end %>
+
+        
     </p>
     </div>
 </div>

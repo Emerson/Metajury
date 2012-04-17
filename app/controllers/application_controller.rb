@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :require_admin, :admin_layout, :use_admin_layout?, :admin_layout?
 
   def current_user
-    if cookies[:auth_token]
+    if !cookies[:auth_token].blank?
       @current_user ||= User.find_by_auth_token(cookies[:auth_token])
     else
       @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311200504) do
+ActiveRecord::Schema.define(:version => 20120417151049) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(:version => 20120311200504) do
   end
 
   add_index "submissions", ["score"], :name => "index_submissions_on_score"
+
+  create_table "submissions_tags", :id => false, :force => true do |t|
+    t.integer "tag_id"
+    t.integer "submission_id"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.boolean  "featured"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

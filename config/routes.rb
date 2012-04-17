@@ -32,6 +32,8 @@ RocketFuel::Application.routes.draw do
   match 'submission/:id/upvote' => 'submissions#upvote', :as => 'upvote'
   match 'submission/:id/downvote' => 'submissions#downvote', :as => 'downvote'
 
+  # Tag Paths
+  match 'tags/:tag' => 'submissions#tag', :as => 'tag'
 
   namespace :admin do
     resources :users do

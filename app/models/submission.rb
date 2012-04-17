@@ -9,6 +9,8 @@ class Submission < ActiveRecord::Base
   belongs_to :user
   has_many :votes, :foreign_key => :item_id, :dependent => :destroy
   has_many :comments, :dependent => :destroy
+  has_and_belongs_to_many :tags 
+  accepts_nested_attributes_for :tags
 
   # Callbacks
   after_create :add_initial_upvate
