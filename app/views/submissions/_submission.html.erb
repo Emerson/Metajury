@@ -45,7 +45,7 @@ end
         <% if submission.tags.count > 0 %>
         <span><i class="icon-tag"></i> Tags: </span>
         <% submission.tags.each do |tag| %>
-            <a href="#"><%= tag.name %></a>&nbsp; 
+            <%= link_to tag.name, tag_path(tag.slug) %>
         <% end %>
         <% end %>
 
