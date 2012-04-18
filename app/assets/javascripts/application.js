@@ -26,6 +26,14 @@
 //= require js/bootstrap-tooltip.js
 //= require js/bootstrap-typeahead.js
 
+// JQUERY-TEXTEXT (vendor/assets/jquery-textext/)
+//
+//= require js/textext.core.js
+//= require js/textext.plugin.autocomplete.js
+//= require js/textext.plugin.prompt.js
+//= require js/textext.plugin.tags.js
+//= require js/textext.plugin.ajax.js
+
 //= require_tree .
 
 
@@ -33,5 +41,35 @@
 $(document).ready(function() {
 
    $(".alert-message").alert();
+
+   $('#tags_list').textext({
+   	plugins: 'tags prompt autocomplete ajax',
+   	ajax: {
+   		url: tag_list_url,
+   		dataType: 'json',
+   		results: function(query) {
+   			console.log(query);
+   		}
+   	},
+   	autocomplete: {
+   		render: function(suggestion) {
+   			return suggestion.name;
+   		}
+   	},
+   	ext: {
+	    itemManager: {
+	        stringToItem: function(str) {
+	            return { name: str };
+	        },
+	        itemToString: function(item) {
+	            return item.name;
+	    	},
+	    	compareItems: function(item1, item2) {
+	        return item1.name == item2.name;
+	    	}
+		}
+    },
+   	prompt: 'Add a tag...'
+   });
 
 });

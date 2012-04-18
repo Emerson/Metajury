@@ -6,6 +6,10 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <script type="text/javascript">
+
+    var base_url      = "<%= url_for root_path :only_path => false %>";
+    var tag_list_url  = "<%= url_for tag_list_path :only_path => false%>";
+
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-29730687-1']);
     _gaq.push(['_setDomainName', 'metajury.com']);

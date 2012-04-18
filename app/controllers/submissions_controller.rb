@@ -39,6 +39,11 @@ class SubmissionsController < ApplicationController
     @submissions = @tag.submissions
   end
 
+  def tag_list
+    @tags = Tag.where("name LIKE ?", "%#{params[:q]}%").all
+    render :json => @tags
+  end
+
   def destroy
   end
 
