@@ -42,7 +42,7 @@
           <div class="control-group <%= error_class_for(f.object, :description) %>">
             <%= tag_fields.label :list, 'Tags', :class => 'control-label' %>
             <div class="controls">
-              <%= tag_fields.text_area :list, {:class => 'input-xlarge', :value => '', :rows => 1} %>
+              <%= tag_fields.hidden_field :list, {:class => 'input-xlarge', :value => '', :rows => 1} %>
               <p class="help-block">eg. Tech, Funny, Image</p>
             </div><!-- .controls -->
           </div><!-- .control-group -->

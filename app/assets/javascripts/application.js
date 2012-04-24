@@ -26,50 +26,64 @@
 //= require js/bootstrap-tooltip.js
 //= require js/bootstrap-typeahead.js
 
-// JQUERY-TEXTEXT (vendor/assets/jquery-textext/)
+// Select2 (vendor/assets/select2/)
 //
-//= require js/textext.core.js
-//= require js/textext.plugin.autocomplete.js
-//= require js/textext.plugin.prompt.js
-//= require js/textext.plugin.tags.js
-//= require js/textext.plugin.ajax.js
+//= require select2.js
 
 //= require_tree .
 
+
+function guidGenerator() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+
+String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g,"");
+}
+String.prototype.ltrim = function() {
+    return this.replace(/^\s+/,"");
+}
+String.prototype.rtrim = function() {
+    return this.replace(/\s+$/,"");
+}
 
 
 $(document).ready(function() {
 
    $(".alert-message").alert();
 
-   $('#tags_list').textext({
-   	plugins: 'tags prompt autocomplete ajax',
-   	ajax: {
-   		url: tag_list_url,
-   		dataType: 'json',
-   		results: function(query) {
-   			console.log(query);
-   		}
-   	},
-   	autocomplete: {
-   		render: function(suggestion) {
-   			return suggestion.name;
-   		}
-   	},
-   	ext: {
-	    itemManager: {
-	        stringToItem: function(str) {
-	            return { name: str };
-	        },
-	        itemToString: function(item) {
-	            return item.name;
-	    	},
-	    	compareItems: function(item1, item2) {
-	        return item1.name == item2.name;
-	    	}
-		}
+    var sanatize = /[^A-Za-z0-9\s]/g;
+
+   $('#tags_list').select2({
+    minimumInputLength: 2,
+    tags: [],
+    createSearchChoice: function(term) {
+        return {name: term.replace(sanatize, '').ltrim().rtrim(), id: term.replace(sanatize, '').ltrim().rtrim()};
     },
-   	prompt: 'Add a tag...'
+    ajax: {
+        url: tag_list_url,
+        dataType: 'json',
+        data: function(term, page) {
+            return {
+                q: term
+            }
+        },
+        results: function(data, page) {
+            $.each(data, function(index, item) {
+                item.id = item.name;
+            });
+            return {results: data};
+        }
+    },
+    formatResult: function(object) {
+        return object.name;
+    },
+    formatSelection: function(object) {
+        return object.name;
+    }
    });
 
 });
