@@ -36,7 +36,7 @@ class SubmissionsController < ApplicationController
 
   def tag
     @tag = Tag.find_by_slug(params[:tag])
-    @submissions = @tag.submissions
+    @submissions = @tag.submissions.paginate(:page => params[:page]).order('score DESC, created_at DESC')
   end
 
   def tag_list
