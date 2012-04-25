@@ -146,6 +146,26 @@ body {
 	margin-bottom: 30px;
 }
 
+.tags {
+	margin-left: 10px;
+	margin-right: 5px;
+}
+
+.submission .tag {
+	font-size: 11px;
+	background: #efefef;
+	padding: 4px 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-right: 4px;
+}
+
+.submission .tag:hover {
+	background: #fff2ba;
+	text-decoration: none;
+}
+
 .footer {
 	margin-top: 25px;
 	padding: 25px 0 25px;

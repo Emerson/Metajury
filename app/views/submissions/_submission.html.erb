@@ -43,9 +43,9 @@ end
         
         <%= link_to pluralize(submission.comments.count, "comment"), submission_comment_path(submission.id), {:class => 'comments_link', 'data-number-of-comments' => submission.comments.count} %>
         <% if submission.tags.count > 0 %>
-        <span><i class="icon-tag"></i> Tags: </span>
+        <span class="tags"><i class="icon-tag"></i> Tags: </span>
         <% submission.tags.each do |tag| %>
-            <%= link_to tag.name, tag_path(tag.slug) %>
+            <%= link_to tag.name, tag_path(tag.slug), :class => 'tag' %>
         <% end %>
         <% end %>
 

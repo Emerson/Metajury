@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
 
-  before_filter :require_logged_in_user, :except => :index
+  before_filter :require_logged_in_user, :except => [:index, :tag]
 
   def index
   end
@@ -40,7 +40,8 @@ class SubmissionsController < ApplicationController
   end
 
   def tag_list
-    @tags = Tag.where("name LIKE ?", "%#{params[:q]}%").all
+    slug = Tag.new(:name => params[:q]).normalize_friendly_id(params[:q])
+    @tags = Tag.where("name LIKE ?", "%#{slug}%").all
     render :json => @tags
   end
 
