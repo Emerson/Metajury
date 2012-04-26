@@ -33,7 +33,7 @@ end
         <% if submission.user.blank? # TODO: Fix this as it was causing issues with testing %>
         unknown 
         <% else %>
-            <%= submission.user.username %>
+            <%= link_to submission.user.username, user_submissions_path(submission.user.id) %>
         <% end %>
     </small></p>
     <% unless submission.description.empty? %>

@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
 
-  before_filter :require_logged_in_user, :except => [:index, :tag]
+  before_filter :require_logged_in_user, :except => [:index, :tag, :user_submissions]
 
   def index
   end
@@ -25,10 +25,12 @@ class SubmissionsController < ApplicationController
   end
 
   def user_submissions
+    @user = User.find(params[:id])
+    @submissions = @user.submissions.paginate(:page => params[:page]).order('created_at DESC').all
   end
 
   def current_user_submissions
-    @submissions = @current_user.submissions.all
+    @submissions = @current_user.submissions.paginate(:page => params[:page]).order('created_at DESC').all
   end
 
   def view

@@ -65,6 +65,7 @@ Scenario: Password Reset Flow
   And I reset the "password-reset@rocketfuel.com" account password to "newpassword"
   Then the "password-reset@rocketfuel.com" account password should be "newpassword"
 
+@view
 Scenario: Viewing User Submissions Page
   Given I have a user with the email "mysubmissions@rocketfuel.com" and the password "password"
   And the user "mysubmissions@rocketfuel.com" has 5 submissions

@@ -1,10 +1,33 @@
-<ul>
-<% @submissions.each do |submission| %>
+<div id="current_user_submissions" class="current_user_submissions content" data-homepage="logged-in">
 
-	<li>
-		<h4><%= link_to submission.title, submission.url, {:target => '_blank'} %></h4>
-		<p><%= submission.description %></p>
-	</li>
+    <div class="page-header">
+        <h1><%= @current_user.username %>'s Submissions</h1>
+    </div><!-- .page-header -->
 
-<% end %>
-</ul>
+    <div class="row">
+
+      <div class="span9">
+        <% if @submissions.empty? %>
+          <p>Oh my, You do not have any links yet. Why not <%= link_to 'submit', new_submission_path %> one.</p>
+        <% else %>
+          <%= render :partial => 'submissions/submission', :collection => @submissions %>
+        <% end %>
+
+        <%= will_paginate @submissions %>
+
+      </div>
+
+      <div class="span3">
+        <h3>Add a Submission</h3>
+        <p>
+          Found something cool? Why not submit it and share the love.
+        </p>
+        <p><%= link_to 'Add Submission', new_submission_path, :class => 'btn btn-primary' %></p>
+
+        <%= render 'layouts/dev_news' %>
+
+      </div>
+
+    </div><!-- .row -->
+ 
+</div>

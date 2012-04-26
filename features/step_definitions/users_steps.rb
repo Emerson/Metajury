@@ -185,6 +185,7 @@ end
 Given /^I visit the submission page for "([^"]*)"$/ do |email|
   u = User.find_by_email(email)
   visit user_submissions_path(u.id)
+  assert(page.has_selector?('.alert-error') === false, "There was an error on the page")
 end
 
 Then /^I should see (\d+) submissions$/ do |number_of_submissions|
