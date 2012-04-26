@@ -11,7 +11,7 @@ Given /^I add a new submission$/ do
 end
 
 Then /^the submission appear in my submitted links page$/ do
-  visit user_submissions_path
+  visit current_user_submissions_path
   assert page.has_content?('Cool new site')
 end
 

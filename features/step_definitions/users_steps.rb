@@ -175,3 +175,18 @@ Then /^the "([^"]*)" account password should be "([^"]*)"$/ do |email, new_passw
   user = User.login(email, new_password)
   assert(user)
 end
+
+Given /^the user "([^"]*)" has (\d+) submissions$/ do |email, number_of_submissions|
+  u = User.find_by_email(email)
+  (1..number_of_submissions.to_i).each { |index| FactoryGirl.create(:valid_submission, :user_id => u.id) }
+  assert(User.find(u.id).submissions.count === 5, "Expected 5 submissions, got #{User.find(u.id).submissions.count}")
+end
+
+Given /^I visit the submission page for "([^"]*)"$/ do |email|
+  u = User.find_by_email(email)
+  visit user_submissions_path(u.id)
+end
+
+Then /^I should see (\d+) submissions$/ do |number_of_submissions|
+  assert(page.has_css?("div.submission", :count => number_of_submissions), "Expecting #{number_of_submissions} submissions, but got something else")
+end

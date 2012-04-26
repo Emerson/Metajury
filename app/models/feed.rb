@@ -7,7 +7,7 @@ class Feed < ActiveRecord::Base
       :admin       => true,
       :public_feed => false,
       :feed_type   => 'user_registration',
-      :data        => {:email => user.email, :first_name => user.first_name}.to_json
+      :data        => {:email => user.email, :first_name => user.first_name, :username => user.username}.to_json
     })
   end
 
@@ -18,7 +18,7 @@ class Feed < ActiveRecord::Base
       :admin       => true,
       :public_feed => false,
       :feed_type   => 'user_confirmation',
-      :data        => {:email => user.email, :first_name => user.first_name}.to_json
+      :data        => {:email => user.email, :first_name => user.first_name, :username => user.username}.to_json
     })
   end
 
@@ -29,7 +29,7 @@ class Feed < ActiveRecord::Base
       :admin       => true,
       :public_feed => false,
       :feed_type   => 'user_login',
-      :data        => {:email => user.email, :first_name => user.first_name}.to_json
+      :data        => {:email => user.email, :first_name => user.first_name, :username => user.username}.to_json
     })
   end
 
@@ -40,7 +40,7 @@ class Feed < ActiveRecord::Base
       :admin       => true,
       :public_feed => false,
       :feed_type   => 'user_logout',
-      :data        => {:email => user.email, :first_name => user.first_name}.to_json
+      :data        => {:email => user.email, :first_name => user.first_name, :username => user.username}.to_json
     })
   end
 

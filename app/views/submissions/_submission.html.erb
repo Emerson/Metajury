@@ -33,7 +33,7 @@ end
         <% if submission.user.blank? # TODO: Fix this as it was causing issues with testing %>
         unknown 
         <% else %>
-            <%= submission.user.first_name %> 
+            <%= submission.user.username %>
         <% end %>
     </small></p>
     <% unless submission.description.empty? %>

@@ -24,10 +24,10 @@ class SubmissionsController < ApplicationController
     end
   end
 
-  # user_submissions
-  # ================
-  # Displays a list of all the current users submissions
   def user_submissions
+  end
+
+  def current_user_submissions
     @submissions = @current_user.submissions.all
   end
 

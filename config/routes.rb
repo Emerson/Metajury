@@ -8,6 +8,8 @@ RocketFuel::Application.routes.draw do
 
   # User Routes
   resources :users
+  match 'users/:id/submissions' => 'submissions#user_submissions', :as => 'user_submissions'
+
   match 'confirm/:token'   => 'users#confirm',   :as => 'confirmation'
   match 'reconfirm/:id'    => 'users#reconfirm', :as => 'reconfirm'
 
@@ -26,7 +28,7 @@ RocketFuel::Application.routes.draw do
   end
 
   # User submissions
-  match 'my-submissions' => 'submissions#user_submissions', :as => 'user_submissions'
+  match 'my-submissions' => 'submissions#current_user_submissions', :as => 'current_user_submissions'
 
   # Voting Paths
   match 'submission/:id/upvote' => 'submissions#upvote', :as => 'upvote'
