@@ -22,6 +22,7 @@ end
 group :test do
   # Pretty printed test output
   gem 'minitest'
+  gem 'simplecov'
   gem 'turn', :require => false
   gem 'cucumber-rails'
   gem 'database_cleaner'

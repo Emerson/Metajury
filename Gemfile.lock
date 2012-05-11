@@ -133,6 +133,10 @@ GEM
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
       rubyzip
+    simplecov (0.6.4)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.5.3)
+    simplecov-html (0.5.3)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -174,6 +178,7 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.1)
   sass-rails
+  simplecov
   sqlite3
   turn
   uglifier
