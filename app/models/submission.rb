@@ -4,6 +4,7 @@ class Submission < ActiveRecord::Base
 
   # Validations
   validates_presence_of :title, :description, :url, :user_id
+  validates :url, :presence => true, :uri => { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }
 
   # Associations
   belongs_to :user
