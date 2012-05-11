@@ -6,6 +6,10 @@ else
     active_class_upvote = ''
     active_class_downvote = ''
 end
+
+content_for :description do
+    "#{@submission.title} - #{@submission.description}"
+end
 %>
 
 <div class="row submission-head">
