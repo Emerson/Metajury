@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_filter :require_user, :only => [:create]
+
   def index
     @submission = Submission.find(params[:submission_id])
     @comment = @submission.comments.build(:user_id => @current_user.id) if @current_user
@@ -16,6 +18,14 @@ class CommentsController < ApplicationController
   		flash[:error] = "There was a problem posting your comment"
   	end
   	redirect_to submission_comments_path(@submission)
+  end
+
+private
+
+  def require_user
+    redirect_to root_path unless @current_user.present?
+    flash[:error] = "You need to be logged in to do that"
+    return
   end
 
 end
