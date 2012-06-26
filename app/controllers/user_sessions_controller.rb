@@ -1,6 +1,5 @@
 class UserSessionsController < ApplicationController
 
-
   def login
     session[:user_id] = nil
 

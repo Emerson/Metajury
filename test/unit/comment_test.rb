@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test "validity" do
+    comment = FactoryGirl.create(:valid_comment)
+    assert comment.valid?
+  end
+
 end
