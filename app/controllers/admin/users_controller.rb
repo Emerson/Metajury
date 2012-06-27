@@ -1,8 +1,4 @@
-class Admin::UsersController < ApplicationController
-
-
-  layout 'admin'
-
+class Admin::UsersController < Admin::BaseController
 
   def index
     @users = User.paginate(:page => params[:page], :per_page => 15).order(sort_column + " " + sort_direction).all

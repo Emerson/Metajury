@@ -1,0 +1,15 @@
+<%=
+    link_to ApplicationSettings.config['application_name'],
+        root_path, {:class => 'brand'}
+%>
+
+<!-- Left Side Navigation -->
+<ul class="nav">
+  <%= admin_nav %>
+</ul>
+
+<!-- Right Side Navigation -->
+<ul class="nav pull-right">
+  <%= content_tag(:li, link_to('Standard View', root_path)) %>
+  <li><%= link_to 'Logout', logout_path, {:class => 'logout', :id => 'logout'} %></li>
+</ul>

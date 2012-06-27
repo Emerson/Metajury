@@ -1,6 +1,4 @@
-class Admin::SubmissionsController < ApplicationController
-
-  layout 'admin'
+class Admin::SubmissionsController < Admin::BaseController
 
   def index
     @submissions = Submission.paginate(:page => params[:page]).order('created_at DESC').all
