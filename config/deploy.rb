@@ -95,9 +95,9 @@ namespace :deploy do
 
 end
 
-before "deploy:assets:precompile"
 before 'deploy:setup', 'rvm:install_ruby'
 after 'deploy:update_code', 'deploy:apply_configs'
 after 'deploy:update_code', 'deploy:create_branch_file'
 after 'deploy:update_code', 'deploy:create_dirs'
+after 'deploy:update_code', 'deploy:assets:precompile'
 after 'deploy', 'deploy:cleanup'
