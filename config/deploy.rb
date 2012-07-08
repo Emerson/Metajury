@@ -23,6 +23,7 @@ set :unicorn_pid,    "#{current_path}/tmp/pids/unicorn.pid"
 namespace :unicorn do
   desc "start unicorn"
   task :start, :roles => :app, :except => {:no_release => true} do
+    run "mkdir #{current_path}/tmp/sockets"
     run "cd #{current_path} && bundle exec #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
   end
   desc "stop unicorn"
