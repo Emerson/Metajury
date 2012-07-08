@@ -12,6 +12,7 @@ set :keep_releases, 3
 set :normalize_asset_timestamps, false # Removes No such file/directory warnings.
 set :rvm_ruby_string, '1.9.3@metajury'
 set :rvm_bin_path, "/usr/local/rvm/bin"
+set :rvm_path,  "/usr/local/rvm"
 
 task :production do
   set :application, 'metajury.com'
