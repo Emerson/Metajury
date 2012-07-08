@@ -197,7 +197,7 @@ DEPENDENCIES
   launchy
   minitest
   mysql2
-  rails (= 3.2.1)
+  rails (~> 3.2.1)
   sass-rails
   simplecov
   sqlite3

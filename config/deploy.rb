@@ -9,10 +9,22 @@ set :normalize_asset_timestamps, false # Removes No such file/directory warnings
 
 
 namespace :deploy do
+
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+
+  task :production do
+    set :application, 'metajury.com'
+    set :rails_env,   'production'
+    set :domain,      "metajury.com"
+    set :deploy_to,   "/home/metajury/#{application}"
+    set :branch,      'master'
+    role :app,  domain
+    role :web,  domain
+    role :db,   domain, :primary => true
   end
 
   task :apply_configs, :roles => :app do
