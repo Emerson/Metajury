@@ -14,6 +14,7 @@ gem 'ancestry'
 # in production environments by default.
 group :assets do
   gem 'execjs'
+  gem 'therubyracer'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
