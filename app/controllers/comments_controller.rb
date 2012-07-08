@@ -8,6 +8,14 @@ class CommentsController < ApplicationController
     @comments = @submission.comments.all
   end
 
+  def new
+    @submission = Submission.find(params[:submission_id])
+    @comment = @submission.comments.build(:user_id => @current_user.id, :parent_id => params[:parent_id])
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   def create
   	@submission = Submission.find(params[:submission_id])
   	@comment = @submission.comments.build(params[:comment])
