@@ -38,4 +38,5 @@ end
 
 group :development do
   gem 'capistrano'
+  gem 'rvm-capistrano'
 end
