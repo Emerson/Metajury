@@ -23,7 +23,6 @@ set :unicorn_pid,    "#{current_path}/tmp/pids/unicorn.pid"
 namespace :unicorn do
   desc "start unicorn"
   task :start, :roles => :app, :except => {:no_release => true} do
-    run "mkdir #{current_path}/tmp/sockets"
     run "cd #{current_path} && bundle exec #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
   end
   desc "stop unicorn"
@@ -79,9 +78,14 @@ namespace :deploy do
     run "echo #{branch} > #{release_path}/config/.git_branch"
   end
 
+  tast :create_dirs, :roles => :app do
+    run "mkdir #{release_path}/tmp/sockets"
+  end
+
 end
 
 before 'deploy:setup', 'rvm:install_ruby'
 after 'deploy:update_code', 'deploy:apply_configs'
 after 'deploy:update_code', 'deploy:create_branch_file'
+after 'deploy:update_code', 'deploy:create_dirs'
 after 'deploy', 'deploy:cleanup'
