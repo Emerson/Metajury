@@ -1,8 +1,10 @@
 # Path Setup
 APP_PATH = "/home/metajury/metajury.com/current"
 working_dir = APP_PATH
+working_directory APP_PATH
 
 # General Unicorn Flags
+user 'metajury', 'metajury'
 rails_env = ENV['RAILS_ENV'] || 'production'
 worker_processes 4
 timeout 30
