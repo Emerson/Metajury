@@ -78,7 +78,7 @@ namespace :deploy do
     run "echo #{branch} > #{release_path}/config/.git_branch"
   end
 
-  tast :create_dirs, :roles => :app do
+  task :create_dirs, :roles => :app do
     run "mkdir #{release_path}/tmp/sockets"
   end
 
