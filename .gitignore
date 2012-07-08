@@ -11,3 +11,4 @@ config/email.yml
 config/application_settings.yml
 config/thin.yml
 coverage/
+config/environments/production/*

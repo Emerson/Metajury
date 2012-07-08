@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 
-gem 'rails', '3.2.1'
+gem 'rails', '~>3.2.1'
 gem 'friendly_id'
 gem 'sqlite3'
 gem 'jquery-rails'
@@ -30,4 +30,12 @@ group :test do
   gem 'capybara-webkit'
   gem 'factory_girl_rails'
   gem 'launchy'
+end
+
+group :production do
+  gem 'unicorn'
+end
+
+group :development do
+  gem 'capistrano'
 end
