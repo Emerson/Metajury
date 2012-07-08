@@ -39,8 +39,8 @@ namespace :unicorn do
   end
   desc "restart unicorn"
   task :restart, :roles => :app, :except => {:no_release => true} do
-    stop
-    start
+    # stop
+    # start
   end
 
   after "deploy:restart", "unicorn:restart"
