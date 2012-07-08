@@ -1,6 +1,6 @@
 # Path Setup
 APP_PATH = "/home/metajury/metajury.com/current"
-working_dir APP_PATH
+working_dir = APP_PATH
 
 # General Unicorn Flags
 rails_env = ENV['RAILS_ENV'] || 'production'
