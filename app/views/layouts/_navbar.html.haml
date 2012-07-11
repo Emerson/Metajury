@@ -1,0 +1,7 @@
+= link_to ApplicationSettings.config['application_name'], root_path, {:class => 'brand'}
+
+- if @current_user
+  = render :partial => 'layouts/nav/logged_in'
+
+- else
+  = render :partial => 'layouts/nav/logged_out'

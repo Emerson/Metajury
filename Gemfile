@@ -9,6 +9,7 @@ gem 'dynamic_form'
 gem 'mysql2'
 gem 'will_paginate', '~> 3.0'
 gem 'ancestry'
+gem 'active_link_to'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,6 +37,10 @@ end
 
 group :production do
   gem 'unicorn'
+end
+
+group :assets do
+  gem 'haml'
 end
 
 group :development do

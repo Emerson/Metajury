@@ -1,0 +1,5 @@
+%ul.nav
+  = active_link_to 'Home', root_path, :wrap_tag => :li, :active => :exclusive
+  = active_link_to 'Signup', signup_path, :wrap_tag => :li
+
+= render :partial => 'layouts/nav/login_form'

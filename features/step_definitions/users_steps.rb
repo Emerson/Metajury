@@ -34,7 +34,7 @@ Given /^I login with the email "([^"]*)" and the password "([^"]*)"$/ do |email,
 end
 
 Then /^I should be logged in$/ do
-  assert page.has_selector?('a.logout')
+  assert page.has_selector?('li.logout')
 end
 
 Given /^I am logged in$/ do
@@ -46,7 +46,7 @@ Given /^I am logged in$/ do
 end
 
 Given /^then I log out$/ do
-  click_link('logout')
+  click_link('Logout')
 end
 
 Then /^I should be logged out$/ do
