@@ -10,6 +10,8 @@ gem 'mysql2'
 gem 'will_paginate', '~> 3.0'
 gem 'ancestry'
 gem 'active_link_to'
+gem 'haml'
+gem 'haml-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,7 +42,6 @@ group :production do
 end
 
 group :assets do
-  gem 'haml'
 end
 
 group :development do
