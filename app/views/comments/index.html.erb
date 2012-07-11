@@ -47,8 +47,10 @@ end
 			<div class="comment">
 				<p class="comment-meta"><span class="username"><%= comment.user.username %></span> about <%= time_ago_in_words comment.created_at %> ago</p>
 				<%= comment.content %>
+                <% if @current_user %>
                 <div class="reply-field"></div>
                 <p class="reply"><%= link_to "Reply", new_submission_comment_path(:submission_id => @submission.id, :parent_id => comment.id), :remote => true, :class => 'btn-reply btn' %></p>
+                <% end %>
 			</div><!-- .comment -->
 		<% end %>
 	</div>
