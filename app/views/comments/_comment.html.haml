@@ -1,0 +1,9 @@
+.comment
+  %p.comment-meta
+    %span.username= comment.user.username
+    about #{time_ago_in_words comment.created_at} ago
+  = comment.content
+
+  - if @current_user
+    .reply-field
+    %p.reply= link_to 'Reply', new_submission_comment_path(:submission_id => @submission.id, :parent_id => comment.id), :remote => true, :class => 'btn-reply btn'
