@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :current_user
-  helper_method :current_user, :use_admin_layout?
+  helper_method :current_user, :use_admin_layout?, :logged_in?
 
   def current_user
     if !cookies[:auth_token].blank?
@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
         return false
       end
     end
+    @current_user
+  end
+
+  def logged_in?
+    @current_user.present?
   end
 
   def use_admin_layout?

@@ -1,38 +1,55 @@
 class CommentsController < ApplicationController
 
   before_filter :require_user, :only => [:create]
+  before_filter :load_submission
+  before_filter :build_comment
 
   def index
-    @submission = Submission.find(params[:submission_id])
-    @comment = @submission.comments.build(:user_id => @current_user.id) if @current_user
     @comments = @submission.comments.all
   end
 
   def new
-    @submission = Submission.find(params[:submission_id])
-    @comment = @submission.comments.build(:user_id => @current_user.id, :parent_id => params[:parent_id])
     respond_to do |format|
       format.js {}
     end
   end
 
   def create
-  	@submission = Submission.find(params[:submission_id])
-  	@comment = @submission.comments.build(params[:comment])
-  	@comment.user_id = @current_user.id
-  	if @comment.save
-  		flash[:success] = "Your comment has been posted"
-  	else
-  		flash[:error] = "There was a problem posting your comment"
-  	end
-  	redirect_to submission_comments_path(@submission)
+    @comment.save!
+    flash[:success] = "Your comment has been posted"
+    redirect_to submission_comments_path(@submission)
+  rescue ActiveRecord::RecordInvalid
+    flash[:error] = "There was a problem saving your comment"
+    redirect_to submission_comments_path(@submission)
   end
 
 private
 
+  def load_submission
+    @submission = Submission.find(params[:submission_id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = "That story has disapeared"
+    redirect_to root_path
+    return
+  end
+
+  def build_comment
+    if logged_in?
+      if params[:comment]
+        params[:comment].merge!({:user_id => @current_user.id})
+      else
+        params[:comment] = {:user_id => @current_user.id}
+      end
+      @comment = @submission.comments.build(params[:comment])
+      @comment.parent_id = params[:parent_id] if params[:parent_id]
+    end
+  end
+  
   def require_user
-    redirect_to root_path unless @current_user.present?
-    flash[:error] = "You need to be logged in to do that"
+    unless logged_in?
+      redirect_to root_path
+      flash[:error] = "You need to be logged in to do that"
+    end
     return
   end
 
