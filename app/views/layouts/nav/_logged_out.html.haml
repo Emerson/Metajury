@@ -1,5 +1,8 @@
 %ul.nav
-  = active_link_to 'Home', root_path, :wrap_tag => :li, :active => :exclusive
   = active_link_to 'Signup', signup_path, :wrap_tag => :li
+  %li.vertical-divider
+  = active_link_to 'Videos', tag_path('video'), :wrap_tag => :li
+  = active_link_to 'Funny', tag_path('funny'), :wrap_tag => :li
+  = active_link_to 'Images', tag_path('image'), :wrap_tag => :li
 
 = render :partial => 'layouts/nav/login_form'
