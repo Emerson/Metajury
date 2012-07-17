@@ -1,7 +1,7 @@
 Given /^I add a comment$/ do
   link = page.find('.comments_link:first')
   link.click
-  comment = FactoryGirl.create(:valid_comment)
+  comment = FactoryGirl.build(:valid_comment)
   fill_in 'comment_content', :with => comment.content
   click_button 'add_comment'
 end

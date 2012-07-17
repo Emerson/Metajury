@@ -90,6 +90,7 @@ FactoryGirl.define do
   factory :valid_comment, :class => Comment do
     content "This is an example comment"
     vote_tally 0
+    submission_id 1
   end
 
   # This will use the User class (Admin would have been guessed)

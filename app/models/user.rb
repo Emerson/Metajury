@@ -26,27 +26,27 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :votes
 
 
-  # vote(:type, submission)
+  # vote(:type, item)
   # =======================
-  # Adds a vote of the passed type to the provided submission object.
+  # Adds a vote of the passed type to the provided a voteable object.
   # Returns false if the record is not valid
-  def vote(type, submission)
-    current_vote = self.votes.where(:item_id => submission.id).first
+  def vote(type, item)
+    current_vote = self.votes.where(:item_id => item.id).first
     if current_vote and current_vote.vote_type != type.to_s
       current_vote.destroy
     end
-    vote = self.votes.build(:vote_type => type.to_s, :item_id => submission.id)
+    vote = self.votes.build(:vote_type => type.to_s, :item_id => item.id)
     result = vote.save
-    submission.update_rank
+    item.update_rank
     result
   end
 
 
-  # voted?(:type, submission)
+  # voted?(:type, item)
   # =========================
   # Returns true if a user has already voted for a given type
-  def voted?(type, submission)
-    !self.votes.where(:vote_type => type.to_s, :item_id => submission.id).empty?
+  def voted?(type, item)
+    !self.votes.where(:vote_type => type.to_s, :item_id => item.id).empty?
   end
 
 

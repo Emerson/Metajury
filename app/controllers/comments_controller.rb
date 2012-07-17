@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
 
-  before_filter :require_user, :only => [:create]
+  before_filter :require_user, :only => [:create, :upvote, :downvote]
   before_filter :load_submission
+  before_filter :load_comment, :only => [:upvote, :downvote]
   before_filter :build_comment
 
   def index
@@ -21,6 +22,38 @@ class CommentsController < ApplicationController
   rescue ActiveRecord::RecordInvalid
     flash[:error] = "There was a problem saving your comment"
     redirect_to submission_comments_path(@submission)
+  end
+
+  def upvote
+    response = {}
+    if @current_user.vote(:up, @comment)
+      response[:status] = 'success'
+      response[:message] = 'Comment Upvoted'
+    else
+      response[:status] = 'error'
+      if @current_user.voted?(:up, @comment)
+        response[:message] = "You can only upvote a comment once"
+      else
+        response[:message] = "You cannot upvote that comment"
+      end
+    end
+    render :json => response
+  end
+
+  def downvote
+    response = {}
+    if @current_user.vote(:down, @comment)
+      response[:status] = 'success'
+      response[:message] = 'Comment Downvoted'
+    else
+      response[:status] = 'error'
+      if @current_user.voted?(:down, @comment)
+        response[:message] = "You can only downvote a comment once"
+      else
+        response[:message] = "You cannot downvote that comment"
+      end
+    end
+    render :json => response
   end
 
 private
@@ -45,6 +78,14 @@ private
     end
   end
   
+  def load_comment
+    @comment = Comment.find(params[:id])
+  rescue
+    ActiveRecord::RecordNotFound
+    render :json => {:status => 'error', :message => 'Comment not found'}
+    false
+  end
+
   def require_user
     unless logged_in?
       redirect_to root_path

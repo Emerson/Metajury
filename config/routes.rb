@@ -33,6 +33,8 @@ RocketFuel::Application.routes.draw do
   # Voting Paths
   match 'submission/:id/upvote' => 'submissions#upvote', :as => 'upvote'
   match 'submission/:id/downvote' => 'submissions#downvote', :as => 'downvote'
+  match 'comment/:id/upvote' => 'comments#upvote', :as => 'upvote_comment'
+  match 'comment/:id/downvote' => 'comments#downvote', :as => 'downvote_comment'
 
   # Tag Paths
   match 'tag/:tag'  => 'submissions#tag', :as => 'tag'
