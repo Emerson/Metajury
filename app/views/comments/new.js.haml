@@ -1,0 +1,6 @@
+= form_for @comment, :url => submission_comments_path(@submission) do |f|
+  = f.hidden_field :parent_id
+  .comment_content
+    = f.text_area :content
+  = f.submit 'Add Comment', :class => 'btn'
+  %span or #{link_to 'Cancel', '#', :class => 'btn-cancel-reply'}
