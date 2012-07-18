@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
 
   before_filter :require_user, :only => [:create, :upvote, :downvote]
-  before_filter :load_submission
+  before_filter :load_submission, :except => [:upvote, :downvote]
   before_filter :load_comment, :only => [:upvote, :downvote]
-  before_filter :build_comment
+  before_filter :build_comment, :except => [:upvote, :downvote]
 
   def index
     @comments = @submission.comments.all
@@ -37,7 +37,9 @@ class CommentsController < ApplicationController
         response[:message] = "You cannot upvote that comment"
       end
     end
+    response[:updated_count] = @comment.tally
     render :json => response
+    return
   end
 
   def downvote
@@ -53,7 +55,9 @@ class CommentsController < ApplicationController
         response[:message] = "You cannot downvote that comment"
       end
     end
+    response[:updated_count] = @comment.tally
     render :json => response
+    return
   end
 
 private
